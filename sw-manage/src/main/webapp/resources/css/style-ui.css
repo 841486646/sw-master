@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+.clear{clear: both;}
+/*about form*/
+.fm{margin: 0;padding: 0;}
+.ftitle{font-size: 20px;font-weight: bold;margin: 10px 0;border-bottom: 1px solid #ccc;}
+.fitem{margin-top: 10px;}
+.fitem label{display: inline-block;width: 25%;font-size: 1.2em;}
+.fitem input{width: 70%;font-size: 1.2em;}
+.fitem .textbox .validatebox-text{font-size: 1.2em;}
+.fitem a{font-size: 1.2em;float: right;margin-right: 5%;}
+.fitemline{margin-top: 10px;}
+.fitemline label{display: inline-block;width: 25%;font-size: 1.2em;}
+.fitemline div{display: inline-block;width: 70%;}
+.fitemline div input{font-size: 1.2em;}
+.fitemline div .textbox .validatebox-text{font-size: 1.2em;}*/
+.fitemline div a{font-size: 1.2em;float: right;margin-right: 5%;}

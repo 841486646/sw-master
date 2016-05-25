@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swtec.sw.persist.mapper.RoleMapperExt">
+    <resultMap id="findRolesWithUserCheckedResultMap" type="com.swtec.sw.persist.model.ext.RoleExt" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+	    <result column="is_check" property="selected" jdbcType="INTEGER" />
+	  </resultMap>
+    <select id="findRolesWithUserChecked" parameterType="java.lang.Integer" resultMap="findRolesWithUserCheckedResultMap">
+		SELECT
+			r.id,
+			r.role_name,
+			CASE
+		WHEN ur.role_id IS NULL THEN
+			0
+		ELSE
+			1
+		END is_check
+		FROM
+			sw_role r
+		LEFT JOIN (
+			SELECT
+				role_id
+			FROM
+				sw_user_role
+			WHERE
+				user_id = #{userId}
+		) ur ON r.id = ur.role_id;
+	</select>    
+</mapper>

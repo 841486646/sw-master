@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swtec.sw.persist.mapper.CommodityMapperExt" >
+	<select id="findCommodityCategoryList" resultMap="BaseResultMap" parameterType="com.swtec.sw.persist.model.CommodityExample" >
+		select 
+		c.commodity_name,
+		c.selling_price,
+		c.wholesale_price,
+		c.company_type,
+		c.commodity_number,
+		c.upper_limit_number,
+		c.lower_number,
+		cc.category_name 
+		from 
+		sw_commodity c 
+		LEFT JOIN sw_commodity_category cc ON cc.id=c.commodity_category_id 
+	</select>    
+</mapper>

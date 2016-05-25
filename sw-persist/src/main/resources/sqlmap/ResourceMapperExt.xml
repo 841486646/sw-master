@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swtec.sw.persist.mapper.ResourceMapperExt" >
+	<select id="findPermissionsByUId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT
+			r.id,
+			r. NAME,
+			r.resource_desc,
+			r.is_show,
+			r.url,
+			r.weight,
+			r.parent_id,
+			r.parent_ids,
+			r.permission,
+			r.menu_type,
+			r.create_time,
+			r.update_time
+		FROM
+			sw_resource r,
+			sw_user_role ur,
+			sw_resource_role rr
+		WHERE
+			r.id = rr.resource_id
+		AND ur.user_id = #{userId}
+		AND ur.role_id = rr.role_id
+	</select>
+</mapper>
