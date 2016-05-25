@@ -201,6 +201,7 @@
                 singleSelect:true,
                 fit:true,
                 pagination: true,
+                striped:true,
                 toolbar:'#toolbarTblUser'
             });
         });

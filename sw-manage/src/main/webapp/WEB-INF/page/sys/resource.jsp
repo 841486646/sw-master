@@ -32,7 +32,7 @@
             <input type="hidden" id="addParentIds" name="parentIds"/>
             <div class="fitem">
                 <label>资源名称：</label>
-                <input name="name" class="easyui-validatebox" data-options="required:true,validType:['between[1,20]']" />
+                <input name="name" class="easyui-validatebox" data-options="required:true,validType:['between[1,30]']" />
             </div>
             <div class="fitem">
                 <label>资源Url：</label>
@@ -52,7 +52,7 @@
             </div>
             <div class="fitem">
                 <label>权值：</label>
-                <input name="weight" class="easyui-validatebox" data-options="min:0,increment:1,max:10000,required:true" />
+                <input name="weight" style="width: 250px;" class="easyui-numberbox" data-options="min:0,increment:1,max:10000,required:true" />
             </div>
             <div class="fitem">
                 <label>资源描述：</label>
@@ -82,7 +82,7 @@
             </div>
             <div class="fitem">
                 <label>资源名称：</label>
-                <input name="name" class="easyui-validatebox" readonly="readonly" data-options="required:true,validType:['between[1,20]']" />
+                <input name="name" class="easyui-validatebox"  data-options="required:true,validType:['between[1,30]']" />
             </div>
             <div class="fitem">
                 <label>资源Url：</label>
@@ -102,7 +102,7 @@
             </div>
             <div class="fitem">
                 <label>权值：</label>
-                <input name="weight" class="easyui-validatebox" data-options="min:0,increment:1,max:10000,required:true"/>
+                <input style="width: 250px;" name="weight" class="easyui-numberbox" data-options="min:0,increment:1,max:10000,required:true"/>
             </div>
             <div class="fitem">
                 <label>资源描述：</label>
@@ -184,13 +184,13 @@
                 fitColumns:true,
                 singleSelect:true,
                 fit:true,
+                striped:true,
                 toolbar:'#toolbarTblResource'
             });
         });
         //弹出新增资源窗口
         function showAddDialog(){
         	var row=$('#tblResource').datagrid("getSelected");
-        	alert();
             if(row){
             	if(row.menuType == 'menu'){
             		$('#dialogAddResource').dialog('open').dialog('setTitle','新增子级');

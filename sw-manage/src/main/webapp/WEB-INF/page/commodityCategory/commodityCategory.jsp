@@ -4,18 +4,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%@include file="../inc/head.jsp"%>
     <title>商品类别管理</title>
-
     <!-- 工具栏 -->
     <div id="toolbarTblCommodityCategory">
         <div>
-        	<shiro:hasPermission name="sys:resource:create">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog();">新增子级</a>
+        	<shiro:hasPermission name="warehouse:commodityCategory:create">
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog();">新增商品类别</a>
             </shiro:hasPermission>
-            <shiro:hasPermission name="sys:resource:update">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="showUpdateDialog();">修改资源</a>
+            <shiro:hasPermission name="warehouse:commodityCategory:update">
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="showUpdateDialog();">修改商品类别</a>
             </shiro:hasPermission>
-            <shiro:hasPermission name="sys:resource:delete">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteResource();">删除资源</a>
+            <shiro:hasPermission name="warehouse:commodityCategory:delete">
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteResource();">删除商品类别</a>
             </shiro:hasPermission>
         </div>
     </div>
@@ -26,8 +25,8 @@
     <div id="dialogAddCommodityCategory" class="easyui-dialog" style="width: 500px; height: 420px; padding: 10px 20px;" data-options="modal:true,closed:true,top:50,buttons:'#toolbarDialogAddCommodityCategory'">
         <form id="formAddCommodityCategory" method="post">
         	<div class="fitem">
-                <label>父ID：</label>
-                <input id="addParentId" name="parentId" class="easyui-validatebox" readonly="readonly" data-options="required:true"/>
+                <label>ID：</label>
+                <input id="addParentId"  name="parentId" class="easyui-validatebox" readonly="readonly" data-options="required:true"/>
             </div>
             <input type="hidden" id="addParentIds" name="parentIds"/>
             <div class="fitem">
@@ -35,23 +34,15 @@
                 <input name="categoryName" class="easyui-validatebox" data-options="required:true,validType:['between[1,20]']" />
             </div>
             <div class="fitem">
-                <label>资源Url：</label>
-                <input name="url" class="easyui-validatebox" />
-            </div>
-            <div class="fitem">
-                <label>权限标识：</label>
-                <input id="addPermission" name="permission" class="easyui-validatebox" data-options="required:true" />
-            </div>
-            <div class="fitem">
                 <label>权值：</label>
                 <input name="weight" class="easyui-validatebox" data-options="min:0,increment:1,max:10000,required:true" />
             </div>
             <div class="fitem">
-                <label>资源描述：</label>
-                <input name="resourceDesc" class="easyui-validatebox"/>
+                <label>商品类别描述：</label>
+                <input name="remarks" class="easyui-validatebox"/>
             </div>
             <div class="fitem">
-                <label>资源状态：</label>
+                <label>商品类别状态：</label>
                 <select name="isShow" class="easyui-combobox" data-options="editable:false,required:true,validType:['selectValueRequired']" style="width: 150px;">
                     <c:forEach items="${showTypes }" var="showType">
                         <option value="${showType }"  <c:if test="${showType eq 'show' }">selected="selected" </c:if>>${showType.info }</option>
@@ -61,47 +52,31 @@
         </form>
     </div>
     <div id="toolbarDialogAddCommodityCategory">
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="saveResource();" style="width: 90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="saveCommodityCategory();" style="width: 90px">保存</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:$('#dialogAddCommodityCategory').dialog('close');" style="width: 90px">取消</a>
     </div>
 
     <!-- 修改菜单窗口 -->
-    <div id="dialogUpdateResource" class="easyui-dialog" style="width: 500px; height: 420px; padding: 10px 20px;" data-options="modal:true,closed:true,top:50,buttons:'#toolbarDialogUpdateResource'">
-        <form id="formUpdateResource" method="post">
+    <div id="dialogUpdateCommodityCategory" class="easyui-dialog" style="width: 500px; height: 420px; padding: 10px 20px;" data-options="modal:true,closed:true,top:50,buttons:'#toolbarDialogUpdateCommodityCategory'">
+        <form id="formUpdateCommodityCategory" method="post">
             <div class="fitem">
-                <label>资源ID：</label>
+                <label>ID：</label>
                 <input name="id" class="easyui-validatebox" readonly="readonly" data-options="required:true"/>
             </div>
             <div class="fitem">
-                <label>资源名称：</label>
-                <input name="name" class="easyui-validatebox" readonly="readonly" data-options="required:true,validType:['between[1,20]']" />
-            </div>
-            <div class="fitem">
-                <label>资源Url：</label>
-                <input name="url" class="easyui-validatebox" />
-            </div>
-            <div class="fitem">
-                <label>权限标识：</label>
-                <input name="permission" class="easyui-validatebox" data-options="required:true" />
-            </div>
-            <div class="fitem">
-                <label>菜单类型：</label>
-                <select name="menuType" class="easyui-combobox" data-options="editable:false,required:true,validType:['selectValueRequired']" style="width: 150px;">
-                    <c:forEach items="${menuTypes }" var="menuType">
-                        <option value="${menuType }" >${menuType.info }</option>
-                   	</c:forEach>
-                </select>
+                <label>商品类别名称：</label>
+                <input name="categoryName" class="easyui-validatebox" maxlength="20" data-options="required:true,validType:['between[1,20]']" />
             </div>
             <div class="fitem">
                 <label>权值：</label>
                 <input name="weight" class="easyui-validatebox" data-options="min:0,increment:1,max:10000,required:true"/>
             </div>
             <div class="fitem">
-                <label>资源描述：</label>
-                <input name="resourceDesc" class="easyui-validatebox"/>
+                <label>商品类别描述：</label>
+                <input name="remarks" class="easyui-validatebox"/>
             </div>
             <div class="fitem">
-                <label>资源状态：</label>
+                <label>商品类别状态：</label>
                 <select name="isShow" class="easyui-combobox" data-options="editable:false,required:true,validType:['selectValueRequired']" style="width: 150px;">
                     <c:forEach items="${showTypes }" var="showType">
                         <option value="${showType }"  <c:if test="${showType eq 'show' }">selected="selected" </c:if>>${showType.info }</option>
@@ -110,9 +85,9 @@
             </div>
         </form>
     </div>
-    <div id="toolbarDialogUpdateResource">
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="updateResource();" style="width: 90px">保存</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:$('#dialogUpdateResource').dialog('close');" style="width: 90px">取消</a>
+    <div id="toolbarDialogUpdateCommodityCategory">
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="updateCommodityCategory();" style="width: 90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:$('#dialogUpdateCommodityCategory').dialog('close');" style="width: 90px">取消</a>
     </div>
 
     <script type="text/javascript">
@@ -128,6 +103,18 @@
                     {field:'parentId',title:'父Id',width:30},
                     {field:'parentIds',title:'父Id组',width:60},
                     {
+                        field:'isShow',
+                        title:'是否显示',
+                        width:40,
+                        formatter:function(value,row,index){
+                        	<c:forEach items="${showTypes }" var="showType">
+	                            if("${showType}"==value){
+	                                return "${showType.info}";
+	                            }
+                    		</c:forEach>
+                        }
+                    },
+                    {
                         field:'createTime',
                         title:'创建时间',
                         width:100,
@@ -141,6 +128,7 @@
                 fitColumns:true,
                 singleSelect:true,
                 fit:true,
+                striped:true,
                 toolbar:'#toolbarTblCommodityCategory'
             });
         });
@@ -148,11 +136,10 @@
         function showAddDialog(){
             var row=$('#tblCommodityCategory').datagrid("getSelected");
             if(row){
-            		$('#dialogAddCommodityCategory').dialog('open').dialog('setTitle','新增子级');
+            		$('#dialogAddCommodityCategory').dialog('open').dialog('setTitle','新增类别');
                     disableValidateWhenInit('formAddCommodityCategory');
                     $('#addParentId').val(row.id);
                     $('#addParentIds').val(row.parentIds);
-                    $('#addPermission').val(row.permission);
             }else{
                 $.messager.show({
                     title:'提示',
@@ -161,12 +148,12 @@
             }
         }
         //保存新增的资源
-        function saveResource(){
+        function saveCommodityCategory(){
             enableValidateWhenSubmit('formAddCommodityCategory');
             if($('#formAddCommodityCategory').form('validate')){
                 $.ajax({
                     async:false,
-                    url:"<%=rootUrl%>/resource/save",
+                    url:"<%=rootUrl%>/commodityCategory/save",
                     type:"POST",
                     data:$('#formAddCommodityCategory').serialize(),
                     dataType: "json",
@@ -203,14 +190,21 @@
         //删除资源
         function deleteResource(){
             var row=$('#tblCommodityCategory').datagrid("getSelected");
+            if(row.id==2){
+            	$.messager.show({
+                    title:'提示',
+                    msg:'根节点不允许删除.'
+                });
+            	return false;
+            }
             if(row){
-                $.messager.confirm('提示','确定删除该资源（菜单）吗?',function(r){
+                $.messager.confirm('提示','确定删除该数据吗?',function(r){
                     if(r){
                         $.ajax({
                             async:false,
-                            url:"<%=rootUrl%>/resource/delete",
+                            url:"<%=rootUrl%>/commodityCategory/delete",
                             type:"POST",
-                            data:{resourceId:row.id},
+                            data:{id:row.id},
                             dataType: "json",
                             beforeSend: function(){
                                 showLoading();
@@ -248,14 +242,14 @@
                 });
             }
         }
-        //弹出修改资源窗口
+        //弹出修改窗口
         function showUpdateDialog(){
             var row=$('#tblCommodityCategory').datagrid("getSelected");
             if(row){
-                $('#dialogUpdateResource').dialog('open').dialog('setTitle','修改资源');
-                $('#formUpdateResource').form('clear');
-                $('#formUpdateResource').form('load',row);
-                disableValidateWhenInit('formUpdateResource');
+                $('#dialogUpdateCommodityCategory').dialog('open').dialog('setTitle','修改商品类别');
+                $('#formUpdateCommodityCategory').form('clear');
+                $('#formUpdateCommodityCategory').form('load',row);
+                disableValidateWhenInit('formUpdateCommodityCategory');
             }else{
                 $.messager.show({
                     title:'提示',
@@ -263,15 +257,15 @@
                 });
             }
         }
-        //保存更新的资源
-        function updateResource(){
-            enableValidateWhenSubmit('formUpdateResource');
-            if ($('#formUpdateResource').form('validate')) {
+        //保存更新
+        function updateCommodityCategory(){
+            enableValidateWhenSubmit('formUpdateCommodityCategory');
+            if ($('#formUpdateCommodityCategory').form('validate')) {
                 $.ajax({
                     async:false,
-                    url:"<%=rootUrl%>/resource/update",
+                    url:"<%=rootUrl%>/commodityCategory/update",
                     type:"POST",
-                    data:$('#formUpdateResource').serialize(),
+                    data:$('#formUpdateCommodityCategory').serialize(),
                     dataType: "json",
                     beforeSend: function(){
                         showLoading();
@@ -283,7 +277,7 @@
                                 title:'提示',
                                 msg:data.msg
                             });
-                            $('#dialogUpdateResource').dialog("close");
+                            $('#dialogUpdateCommodityCategory').dialog("close");
                             $('#tblCommodityCategory').treegrid('reload');
                         }else{
                             $.messager.show({

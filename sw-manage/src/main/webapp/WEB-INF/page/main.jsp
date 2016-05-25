@@ -12,9 +12,9 @@
     
 </head>
 <body class="easyui-layout">
-    <div data-options="region:'north',title:'',split:true" style="overflow: hidden; height: 70px; background-color: #a11e2c;">
+    <div data-options="region:'north',title:'',split:true" style="overflow: hidden; height: 70px; background-color: #95B8E7;">
         <div style="margin-left: 30px; float: left; margin-top: 5px;">
-            <img src="<%=rootUrl%>/resources/images/logo(1).png" style="height: 50px;">
+        	<img src="<%=rootUrl%>/resources/images/logo(1).png" style="height: 50px;">
         </div>
         <div style="font-weight: bold; font-size: 20px; color: #fff; margin-top: 15px; float: left; margin-left: 15px;">E-ZONE后台管理平台</div>
         <div style="color: #fff; margin-right: 30px; margin-top: 15px; float: right; vertical-align: middle;">
@@ -42,7 +42,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" onclick="removeTabs();"></a>
         </div>
     </div>
-    <div data-options="region:'south',split:true,title:''" style="height: 40px; background: #a11e2c; text-align: center; margin: 0 auto;">
+    <div data-options="region:'south',split:true,title:''" style="height: 40px; background: #95B8E7; text-align: center; margin: 0 auto;">
         <span style="color: #fff; font-size: 12px; line-height: 30px;">版权所有：</span>
     </div>
     <script type="text/javascript">
@@ -74,41 +74,41 @@
 	    }
 	    //当前时间
 	 function showLocale(objD){
-var str,colorhead,colorfoot;
-var yy = objD.getYear();
-if(yy<1900) yy = yy+1900;
-var MM = objD.getMonth()+1;
-if(MM<10) MM = '0' + MM;
-var dd = objD.getDate();
-if(dd<10) dd = '0' + dd;
-var hh = objD.getHours();
-if(hh<10) hh = '0' + hh;
-var mm = objD.getMinutes();
-if(mm<10) mm = '0' + mm;
-var ss = objD.getSeconds();
-if(ss<10) ss = '0' + ss;
-var ww = objD.getDay();
-if  ( ww==0 )  colorhead="<font>";
-if  ( ww > 0 && ww < 6 )  colorhead="<font>";
-if  ( ww==6 )  colorhead="<font>";
-if  (ww==0)  ww="星期日";
-if  (ww==1)  ww="星期一";
-if  (ww==2)  ww="星期二";
-if  (ww==3)  ww="星期三";
-if  (ww==4)  ww="星期四";
-if  (ww==5)  ww="星期五";
-if  (ww==6)  ww="星期六";
-colorfoot="</font>"
-str = "当前时间："+colorhead + yy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "  " + ww + colorfoot;
-return(str);
-}
-function tick(){
-var today;
-today = new Date();
-document.getElementById("Localnowtime").innerHTML = showLocale(today);
-window.setTimeout("tick()", 1000);
-}
-tick();  
+		var str,colorhead,colorfoot;
+		var yy = objD.getYear();
+			if(yy<1900) yy = yy+1900;
+		var MM = objD.getMonth()+1;
+			if(MM<10) MM = '0' + MM;
+		var dd = objD.getDate();
+			if(dd<10) dd = '0' + dd;
+		var hh = objD.getHours();
+			if(hh<10) hh = '0' + hh;
+		var mm = objD.getMinutes();
+			if(mm<10) mm = '0' + mm;
+		var ss = objD.getSeconds();
+			if(ss<10) ss = '0' + ss;
+		var ww = objD.getDay();
+			if  ( ww==0 )  colorhead="<font>";
+			if  ( ww > 0 && ww < 6 )  colorhead="<font>";
+			if  ( ww==6 )  colorhead="<font>";
+			if  (ww==0)  ww="星期日";
+			if  (ww==1)  ww="星期一";
+			if  (ww==2)  ww="星期二";
+			if  (ww==3)  ww="星期三";
+			if  (ww==4)  ww="星期四";
+			if  (ww==5)  ww="星期五";
+			if  (ww==6)  ww="星期六";
+		colorfoot="</font>"
+		str = "当前时间："+colorhead + yy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "  " + ww + colorfoot;
+			return(str);
+		}
+			function tick(){
+				var today;
+				today = new Date();
+				document.getElementById("Localnowtime").innerHTML = showLocale(today);
+				window.setTimeout("tick()", 1000);
+			}
+		tick();  
     </script>
 </body>
 </html>

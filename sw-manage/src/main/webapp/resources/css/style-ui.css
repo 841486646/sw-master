@@ -14,3 +14,5 @@
 .fitemline div input{font-size: 1.2em;}
 .fitemline div .textbox .validatebox-text{font-size: 1.2em;}*/
 .fitemline div a{font-size: 1.2em;float: right;margin-right: 5%;}
+.spanRequired{color: red;}
+.tdHeight{height: 30px;}

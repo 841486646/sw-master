@@ -52,7 +52,7 @@ $.extend($.fn.validatebox.defaults.rules,{
             if(null==value || ''==value || typeof(value)=='undefined'){
                 return true;
             }
-            return 0==value.replace(/[1-9]{1}[0-9]+/,"").length;
+            return 0==value.replace(/^[0-9]*[1-9][0-9]*$/,"").length;
         },
         message:'请输入正整数.'
     },

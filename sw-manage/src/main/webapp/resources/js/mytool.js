@@ -88,3 +88,27 @@ function fmtDate(dtData, fmt){
     }
     return fmt;
 }
+(function () {
+    $.extend($.fn.tabs.methods, {
+        //显示遮罩
+        loading: function (jq, msg) {
+            return jq.each(function () {
+                var panel = $(this).tabs("getSelected");
+                if (msg == undefined) {
+                    msg = "正在加载数据，请稍候...";
+                }
+                $("<div class=\"tabs-mask-div\"></div>").css({ display: "block", width: "100%", height: "100%" }).appendTo(panel);
+                $("<div class=\"datagrid-mask-msg\"></div>").html(msg).appendTo(panel).css({ display: "block", left: (panel.width() - $("div.datagrid-mask-msg", panel).outerWidth()) / 2, top: (panel.height() - $("div.datagrid-mask-msg", panel).outerHeight()) / 2 });
+            });
+        }
+,
+        //隐藏遮罩
+        loaded: function (jq) {
+            return jq.each(function () {
+                var panel = $(this).tabs("getSelected");
+                panel.find("div.datagrid-mask-msg").remove();
+                panel.find("div.tabs-mask-div").remove();
+            });
+        }
+    });
+})(jQuery);	

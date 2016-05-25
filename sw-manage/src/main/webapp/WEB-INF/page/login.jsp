@@ -50,7 +50,7 @@
             <td>
                 <div>
                     <div style="margin-left: 30px; float: left;">
-                        <img src="<%=rootUrl %>/resources/images/logo(1).png" style="height: 50px;"/>
+                    	 <img src="<%=rootUrl %>/resources/images/logo(1).png" style="height: 50px;"/>
                     </div>
                     <div style="font-weight: bold; font-size: 22px; color: #fff; margin-top: 10px; float: right; margin-right: 30px;">E-ZONE后台管理平台</div>
                 </div>
