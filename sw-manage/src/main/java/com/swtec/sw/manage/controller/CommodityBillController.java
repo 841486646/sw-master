@@ -34,7 +34,7 @@ public class CommodityBillController extends BaseController{
 		return "bill/billList";
 	}
 	/**
-	 * 查询信息
+	 * 查询商品单号信息
 	 */
 	@RequiresPermissions("warehouse:commodityBill:commodityBillView")
 	@RequestMapping(value = "/commodityBillList.grid", method = RequestMethod.POST)
