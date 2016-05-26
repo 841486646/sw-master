@@ -42,7 +42,7 @@ public class CommodityBillServiceImpl extends BaseServiceImpl implements Commodi
 		List<CommodityBill> commodityBills=null;
 		try {
 			commodityBillExt.setTotal(commodityBillMapperExt.countByExample(selParam));
-			commodityBills = commodityBillMapperExt.selectByExample(selParam);
+			commodityBills = commodityBillMapperExt.selectCommodityBillList(selParam);
 		} catch (Exception e) {
 			throw new DbException(RespCode.DB_ERROR, e);
 		}

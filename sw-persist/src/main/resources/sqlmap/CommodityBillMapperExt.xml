@@ -1,3 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.swtec.sw.persist.mapper.CommodityBillMapperExt" />
+<mapper namespace="com.swtec.sw.persist.mapper.CommodityBillMapperExt" >
+	<resultMap id="findCommodityAndBillMap" type="com.swtec.sw.persist.model.ext.CommodityBillExt" >
+	    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+	    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+	    <result column="company_type" property="companyType" jdbcType="VARCHAR" />
+	    <result column="company_type" property="companyType" jdbcType="VARCHAR" />
+	    <result column="commodity_number" property="commodityNumber" jdbcType="INTEGER" />
+   	    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+   	    <result column="id" property="id" jdbcType="INTEGER" />
+	  </resultMap>
+	  <!-- 入库单号里面商品查询 -->
+	  <select id="selectCommodityBillList" resultMap="findCommodityAndBillMap" parameterType="com.swtec.sw.persist.model.CommodityBillExample" >
+	   <include refid="Pageable_Prefix" />
+	  	select  cc.category_name,
+	  			c.commodity_name,
+	  			c.company_type,
+	  			cb.commodity_number,
+	  			cb.unit_price,
+	  			cb.id 
+	  			from sw_commodity_bill cb
+				LEFT JOIN sw_commodity c ON cb.commodity_id=c.id
+				LEFT JOIN sw_commodity_category cc ON cc.id=c.commodity_category_id
+		    <if test="_parameter != null" >
+      			<include refid="Example_Where_Clause" />
+    		</if>
+    		<if test="orderByClause != null" >
+      			order by ${orderByClause}
+    		</if>
+		<include refid="Pageable_Suffix" />
+	  </select>
+</mapper>

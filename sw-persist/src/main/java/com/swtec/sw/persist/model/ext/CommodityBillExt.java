@@ -8,6 +8,9 @@ public class CommodityBillExt extends CommodityBill{
 	private int rows;
 	private int total;
 	private boolean selected;
+	private String categoryName;
+	private String commodityName;
+	private String companyType;
 	
 	public boolean isSelected() {
 		return selected;
@@ -33,4 +36,23 @@ public class CommodityBillExt extends CommodityBill{
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	public String getCommodityName() {
+		return commodityName;
+	}
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
+	}
+	public String getCompanyType() {
+		return companyType;
+	}
+	public void setCompanyType(String companyType) {
+		this.companyType = companyType;
+	}
+	
 }

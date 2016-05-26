@@ -10,7 +10,11 @@
     		<table>
     			<tr>
     				<td>入库日期:</td>
-    				<td><input class="easyui-datebox"  value="${billView.createTime}" data-options="required:true" name="createTime" id="createTime"></input><span class="spanRequired">*</span></td>
+    				<td>
+    					<input class="easyui-datebox"  value="${billView.createTime}" data-options="required:true" name="createTime" id="createTime"></input>
+    					<span class="spanRequired">*</span>
+    					<input type="hidden"  name="id" value="${billView.id}">
+    				</td>
     				<td>入库类别:</td>
     				<td>
     					<select name="type" class="easyui-combobox"  data-options="validType:'selectValueRequired'" name="type" style="width: 200px;">
@@ -44,25 +48,27 @@
     	$(function() {
     	    $('#insertBilldatagrid').datagrid({
     	    	 method:"POST",
-    	    	url:"<%=rootUrl%>/commodityBill/commodityBillList.grid",
+    	    	url:"<%=rootUrl%>/commodityBill/commodityBillList.grid?billId="+'${billView.id}',
     	        columns: [[
 				{
-				    field: 'commodityId',
-				    title: '商品id',
+				    field: 'id',
+				    title: '单号商品id',
 				    width: "10%",
 				},
+				{
+				    field: 'categoryName',
+				    title: '商品类型',
+				    width: "15%",
+				},
     	        {
-    	            field: 'commodityId',
+    	            field: 'commodityName',
     	            title: '商品名称',
-    	            width: "15%",
-    	            formatter:function(value,data,index){
-                        <c:forEach items="${commodityList}" var="list">
-                        console.log('${list.id}');
-                            if("${list.id}"==value){
-                                return "${list.commodityName}";
-                            }
-                    	</c:forEach>
-                    }
+    	            width: "20%",
+    	        },
+    	        {
+    	            field: 'companyType',
+    	            title: '单位',
+    	            width: "10%",
     	        },
     	        {
     	            field: 'commodityNumber',
@@ -78,7 +84,7 @@
     	        {
     	            field: 'unitPrice',
     	            title: '单价',
-    	            width: "10%",
+    	            width: "15%",
     	            editor: 'text',
     	            editor: {
     	                type: 'validatebox',
@@ -90,7 +96,7 @@
     	        {
     	            field: 'action',
     	            title: '操作',
-    	            width: "14%",
+    	            width: "15%",
     	            align: 'center',
     	            formatter: function(value, row, index) {
     	                if (row.editing) {
@@ -141,14 +147,6 @@
     	var editcount = 0;
     	function editrow(index) {
     	    $('#insertBilldatagrid').datagrid('beginEdit',index);
-    	    //精致修改input属性
-    	    var catName = $('#insertBilldatagrid').datagrid('getEditor', { index: index, field: 'categoryName'});
-    	    var comName = $('#insertBilldatagrid').datagrid('getEditor', { index: index, field: 'commodityName'});
-    	    var comType = $('#insertBilldatagrid').datagrid('getEditor', { index: index, field: 'companyType'});
-    		$(comId.target).attr('disabled',true);
-    		$(catName.target).attr('disabled',true);
-    		$(comName.target).attr('disabled',true);
-    		$(comType.target).attr('disabled',true);
     	}
     	function deleterow(index) {
     	    $.messager.confirm('确认', '您确定删除吗?',

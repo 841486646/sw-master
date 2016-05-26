@@ -52,24 +52,20 @@
     	       	            field: 'commodityId',
     	       	            title: '商品id',
     	       	            width: "15%",
-    	       	            editor: 'text'
     	       	        },{
     	            field: 'categoryName',
     	            title: '商品类型',
     	            width: "15%",
-    	            editor: 'text'
     	        },
     	        {
     	            field: 'commodityName',
     	            title: '商品名称',
     	            width: "18%",
-    	            editor: 'text'
     	        },
     	        {
     	            field: 'companyType',
     	            title: '单位',
     	            width: "15%",
-    	            editor: 'text',
     	            formatter:function(value,row,index){
                     	<c:forEach items="${companyTypes}" var="companyType">
                             if("${companyType}"==value){
@@ -148,15 +144,6 @@
     	var editcount = 0;
     	function editrow(index) {
     	    $('#insertBilldatagrid').datagrid('beginEdit',index);
-    	    //精致修改input属性
-    	    var comId = $('#insertBilldatagrid').datagrid('getEditor', { index: index, field: 'commodityId'});
-    	    var catName = $('#insertBilldatagrid').datagrid('getEditor', { index: index, field: 'categoryName'});
-    	    var comName = $('#insertBilldatagrid').datagrid('getEditor', { index: index, field: 'commodityName'});
-    	    var comType = $('#insertBilldatagrid').datagrid('getEditor', { index: index, field: 'companyType'});
-    		$(comId.target).attr('disabled',true);
-    		$(catName.target).attr('disabled',true);
-    		$(comName.target).attr('disabled',true);
-    		$(comType.target).attr('disabled',true);
     	}
     	function deleterow(index) {
     	    $.messager.confirm('确认', '您确定删除吗?',

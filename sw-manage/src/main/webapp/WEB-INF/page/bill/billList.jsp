@@ -150,6 +150,7 @@
         
         function showUpdateDialog(){
         	var row=$('#tblBill').datagrid("getSelected");
+        	console.log(row);
             if(row){
             	$('#insertBillDialog').dialog({
                     title: '修改入库单',
