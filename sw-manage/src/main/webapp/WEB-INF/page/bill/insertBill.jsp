@@ -39,7 +39,6 @@
     	</div>
     </form>
     	<table id="insertBilldatagrid" ></table>
-    	<div id="openCommodityDialog"></div>
     	<script type="text/javascript">
     	var users = {total:0,rows:[]}; 
     	$(function() {
@@ -162,14 +161,18 @@
     	}
     	//新增操作
     	function addrow() {
-    		$('#openCommodityDialog').dialog({
+    		$('<div></div>').dialog({
+    			id: 'openCommodityDialog',
                 title: '商户列表',
                 width: 800,
-                height: 600,
+                height: 500,
                 closed: false,
                 cache: false,
                 href: '<%=rootUrl%>/currency/commodityList',
-                modal: true
+                modal: true,
+                onClose: function () {  
+                	$(this).dialog('destroy');//销毁  
+                }
             });
     	}
     	function saveall() {

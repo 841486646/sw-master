@@ -10,8 +10,8 @@
         + request.getServerPort()
         + request.getContextPath();
 %>
-    <!-- CONTEXT_PATH Stone+ -->
     <script type="text/javascript">var CONTEXT_PATH='<%=rootUrl%>';</script>
+    <c:set var="rootUrl" value="<%=rootUrl%>"></c:set>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="<%=rootUrl %>/resources/js/easyui/themes/default/app.css"/>
     <link rel="stylesheet" type="text/css" href="<%=rootUrl %>/resources/js/easyui/themes/icon.css"/>
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/ajaxfileupload.js"></script>
 
     <!-- Favicons -->
-    <link rel="icon" href="<%=rootUrl %>/resources/images/jme.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="<%=rootUrl %>/resources/images/jme.ico" type="image/x-icon" />
+    <link rel="icon" href="<%=rootUrl %>/resources/images/logo.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="<%=rootUrl %>/resources/images/logo.ico" type="image/x-icon" />
 	<script type="text/javascript">
 		$(function(){
 			$("div.datagrid-mask-msg", window.parent.document).hide();
