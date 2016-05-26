@@ -1,7 +1,6 @@
 package com.swtec.sw.manage.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swtec.sw.persist.enums.BillRKType;
 import com.swtec.sw.persist.enums.CompanyType;
-import com.swtec.sw.persist.enums.WarehouseType;
 import com.swtec.sw.persist.model.Bill;
 import com.swtec.sw.persist.model.Commodity;
 import com.swtec.sw.persist.model.CommodityBill;

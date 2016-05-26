@@ -3,19 +3,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%@include file="../inc/head.jsp"%>
-    <title>颜色管理</title>
+    <title>颜色/尺寸管理</title>
 
     <!-- 工具栏 -->
     <div id="toolbarTblColor">
         <div>
         	<shiro:hasPermission name="mt:color:create">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog();">新增颜色</a>
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog();">新增颜色/尺寸</a>
             </shiro:hasPermission>
             <shiro:hasPermission name="mt:color:update">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="showUpdateUIDialog();">修改颜色</a>
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="showUpdateUIDialog();">修改颜色/尺寸</a>
             </shiro:hasPermission>
             <shiro:hasPermission name="mt:color:delete">
-            	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteColor();">删除颜色</a>
+            	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteColor();">删除颜色/尺寸</a>
             </shiro:hasPermission>
         </div>
     </div>
@@ -26,11 +26,11 @@
     <div id="dialogAddColor" class="easyui-dialog" style="width: 500px; height: 380px; padding: 10px 20px;" data-options="modal:true,closed:true,top:50,buttons:'#toolbarDialogAddColor'">
         <form id="formAddColor" method="post">
             <div class="fitem">
-                <label>颜色名称：</label>
+                <label>颜色/尺寸名称：</label>
                 <input name="name" class="easyui-validatebox" data-options="required:true,validType:['between[1,50]']" />
             </div>
             <div class="fitem">
-                <label>颜色描述：</label>
+                <label>颜色/尺寸描述：</label>
                 <input name="description" class="easyui-validatebox"/>
             </div>
         </form>
@@ -41,19 +41,19 @@
     </div>
     <!-- 新增窗口 -->
     
-    <!-- 修改颜色基本信息 -->
+    <!-- 修改颜色/尺寸基本信息 -->
     <div id="dlgColorBaseInfo" class="easyui-dialog" style="width: 500px; height: 350px; padding: 10px 20px;" data-options="modal:true,closed:true,top:50,buttons:'#tbColorBaseInfo'">
         <form id="formColorBaseInfo" method="post">
         	<div class="fitem">
-                <label>颜色ID：</label>
+                <label>颜色/尺寸ID：</label>
                 <input name="id" class="easyui-validatebox" readonly="readonly" data-options="required:true"/>
             </div>
             <div class="fitem">
-                <label>颜色名称：</label>
+                <label>颜色/尺寸名称：</label>
                 <input name="name" class="easyui-validatebox" data-options="required:true,validType:['between[1,50]']" />
             </div>
             <div class="fitem">
-                <label>颜色描述：</label>
+                <label>颜色/尺寸描述：</label>
                 <input name="description" class="easyui-validatebox"/>
             </div>
         </form>
@@ -62,7 +62,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="updateColorInfo();" style="width: 90px">保存</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:$('#dlgColorBaseInfo').dialog('close');" style="width: 90px">取消</a>
     </div>
-    <!-- 修改颜色基本信息 -->
+    <!-- 修改颜色/尺寸基本信息 -->
     
     <div id="tbColorResouce">
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="updateColorResouce();" style="width: 90px">保存</a>
@@ -74,9 +74,9 @@
             $("#tblColor").datagrid({
                 url:"${rootUrl}/mtMachineColor/list.grid",
                 columns:[[
-                    {field:'id',title:'ID',width:50},
-                    {field:'name',title:'颜色名称',width:50},
-                    {field:'description',title:'颜色描述',width:80},
+                    {field:'id',title:'ID',width:20},
+                    {field:'name',title:'颜色/尺寸名称',width:50},
+                    {field:'description',title:'颜色/尺寸描述',width:80},
                     {
                         field:'createTime',
                         title:'创建时间',
@@ -103,13 +103,13 @@
                 toolbar:'#toolbarTblColor'
             });
         });
-        //弹出新增颜色窗口
+        //弹出新增颜色/尺寸窗口
         function showAddDialog() {
-            $('#dialogAddColor').dialog('open').dialog('setTitle','新增颜色');
+            $('#dialogAddColor').dialog('open').dialog('setTitle','新增颜色/尺寸');
             $('#formAddColor').form('clear');
             disableValidateWhenInit("formAddColor");
         }
-        //保存新颜色
+        //保存新颜色/尺寸
         function saveColor() {
             enableValidateWhenSubmit('formAddColor');
             if($('#formAddColor').form('validate')){
@@ -149,11 +149,11 @@
                 });
             }
         }
-        //弹出修改颜色基本信息窗口
+        //弹出修改颜色/尺寸基本信息窗口
         function showUpdateUIDialog() {
             var row=$('#tblColor').datagrid("getSelected");
             if(row){
-                $('#dlgColorBaseInfo').dialog('open').dialog('setTitle','修改颜色基本信息');
+                $('#dlgColorBaseInfo').dialog('open').dialog('setTitle','修改颜色/尺寸基本信息');
                 $('#formColorBaseInfo').form('clear');
                 $('#formColorBaseInfo').form('load',row);
                 disableValidateWhenInit("formColorBaseInfo");
@@ -164,7 +164,7 @@
                 });
             }
         }
-        //保存修改后的颜色的基本信息
+        //保存修改后的颜色/尺寸的基本信息
         function updateColorInfo(){
             enableValidateWhenSubmit('formColorBaseInfo');
             if ($('#formColorBaseInfo').form('validate')) {
@@ -204,11 +204,11 @@
                 });
             }
         }
-        //删除颜色
+        //删除颜色/尺寸
         function deleteColor(){
             var row=$('#tblColor').datagrid("getSelected");
             if(row){
-                $.messager.confirm('提示','确定删除该颜色吗?',function(r) {
+                $.messager.confirm('提示','确定删除该颜色/尺寸吗?',function(r) {
                     if(r){
                         $.ajax({
                             async:false,

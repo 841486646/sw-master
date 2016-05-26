@@ -3,7 +3,6 @@ package com.swtec.sw.service;
 import java.util.List;
 
 import com.swtec.sw.persist.model.CommodityBill;
-import com.swtec.sw.persist.model.Resource;
 import com.swtec.sw.persist.model.ext.CommodityBillExt;
 
 public interface CommodityBillService extends BaseService{
