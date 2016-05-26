@@ -140,7 +140,7 @@
            $('#insertBillDialog').dialog({
                 title: '新增入库单',
                 width: 900,
-                height: 600,
+                height: 500,
                 closed: false,
                 cache: false,
                 href: '<%=rootUrl%>/bill/toInsertBill',

@@ -48,6 +48,7 @@
            });
        	}
    });
+
 });
 	//双击选择供应商退出dialog
 	$('#currencyCommodityDatagrid').datagrid({
