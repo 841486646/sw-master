@@ -21,4 +21,9 @@ public interface Constants {
      * 错误key
      */
     String ERROR = "error";
+    
+    /**
+     * session中的验证码
+     */
+    String CODE_IN_SESSON = "code";
 }

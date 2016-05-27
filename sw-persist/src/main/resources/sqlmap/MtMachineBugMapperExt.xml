@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swtec.sw.persist.mapper.MtMachineBugMapperExt">
+    <resultMap id="BaseResultExtMap" type="com.swtec.sw.persist.model.ext.MtMachineBugExt" extends="BaseResultMap">
+	    <result column="color_name" property="colorName" jdbcType="VARCHAR" />
+	    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+	    <result column="machinetype_name" property="machinetypeName" jdbcType="VARCHAR" />
+	  </resultMap>
+  
+    <select id="selectExtByExample" resultMap="BaseResultExtMap" parameterType="com.swtec.sw.persist.model.MtMachineBugExample" >
+    <include refid="Pageable_Prefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    mb.id, mb.name, mb.price, mb.machine_type_id, mb.machine_color_id, mb.description, 
+    mb.create_time, mb.update_time,mt.name as machinetype_name,mc.name as color_name,
+    mp.name as product_name
+    from sw_mt_machine_bug mb left join sw_mt_machine_type mt on mt.id=mb.machine_type_id
+    left join sw_mt_machine_color mc on mc.id=mb.machine_color_id left join sw_mt_product mp
+    on mp.id=mt.product_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="Pageable_Suffix" />
+  </select>
+</mapper>

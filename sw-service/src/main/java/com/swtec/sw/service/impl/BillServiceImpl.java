@@ -1,7 +1,6 @@
 package com.swtec.sw.service.impl;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +18,6 @@ import com.swtec.sw.persist.model.Bill;
 import com.swtec.sw.persist.model.BillExample;
 import com.swtec.sw.persist.model.Commodity;
 import com.swtec.sw.persist.model.CommodityBill;
-import com.swtec.sw.persist.model.CommodityBillExample;
-import com.swtec.sw.persist.model.Resource;
 import com.swtec.sw.persist.model.ext.BillExt;
 import com.swtec.sw.service.BillService;
 import com.swtec.sw.utils.DateUtil;

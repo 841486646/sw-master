@@ -25,7 +25,7 @@
         <ul class="clearfix" style="width: 25.2rem;">
            <c:forEach items="${machineTypes}" var="machineType">
                 <li>
-	                <a href="${rootUrl}/mt/machineBug?machineTypeId=${machineType.id}"><img src="${rootUploadImgUrl}${machineType.imgUrl}">${machineType.name}</a>
+	                <a href="${rootUrl}/apple/machineBug?machineTypeId=${machineType.id}"><img src="${rootUploadImgUrl}${machineType.imgUrl}">${machineType.name}</a>
 	            </li>
            	</c:forEach>
         </ul>

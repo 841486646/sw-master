@@ -109,17 +109,6 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-	<!--验证码  
-	<servlet>  
-    	<servlet-name>AuthImageServlet</servlet-name>  
-    	<servlet-class>com.swtec.sw.utils.AuthImageServlet</servlet-class>  
-  	</servlet>  
-  	<servlet-mapping>  
-    	<servlet-name>AuthImageServlet</servlet-name>  
-    	<url-pattern>/servlet/AuthImageServlet</url-pattern>  
-  	</servlet-mapping>
-  	--> 	
   	
 	<error-page>
         <error-code>403</error-code>

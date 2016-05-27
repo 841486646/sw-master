@@ -175,6 +175,7 @@
                 onClose: function () {  
                 	$(this).dialog('destroy');//销毁  
                 }
+                
             });
     	}
     	function saveall() {

@@ -32,7 +32,7 @@
         <ul>
         	<c:forEach items="${products }" var="product">
                 <li>
-	                <a href="${rootUrl}/mt/machineType?productId=${product.id}"><img src="${rootUploadImgUrl}${product.imgUrl}"></a>
+	                <a href="${rootUrl}/apple/machineType?productId=${product.id}"><img src="${rootUploadImgUrl}${product.imgUrl}"></a>
 	            </li>
            	</c:forEach>
         </ul>
@@ -40,8 +40,8 @@
     <section class="otherchoice-content clearfix">
         <ul>
             <li><a href="#"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_1.png" alt=""></a></li>
-            <li><a href="${rootUrl}/mt/about"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_2.png" alt=""></a></li>
-            <li><a href="${rootUrl}/mt/guarantee"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_3.png" alt=""></a></li>
+            <li><a href="${rootUrl}/apple/about"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_2.png" alt=""></a></li>
+            <li><a href="${rootUrl}/apple/guarantee"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_3.png" alt=""></a></li>
             <li><a href="https://shop58866385.taobao.com/"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_4.png" alt=""></a></li>
         </ul>
     </section>

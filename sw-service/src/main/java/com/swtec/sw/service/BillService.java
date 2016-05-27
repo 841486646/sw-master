@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.swtec.sw.persist.model.Bill;
-import com.swtec.sw.persist.model.CommodityBill;
 import com.swtec.sw.persist.model.ext.BillExt;
 /**
  * 商品单号接口
