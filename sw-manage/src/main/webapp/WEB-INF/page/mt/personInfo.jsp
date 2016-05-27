@@ -26,7 +26,7 @@
     <p><input type="text" name="code" id="code">
     <img id="codeImg" onclick="javascript:refreshCode()" src="getValidCode" border="0" alt="验证码"></p>
     <p class="clause-main"><input type="checkbox" name="clause" id="clause" checked="" onclick="javascript:if(this.checked){document.getElementById(&quot;btn&quot;).className = &quot;&quot;;}else{document.getElementById(&quot;btn&quot;).className=&quot;disabled&quot;}">
-            我同意<a href="${rootUrl}/mt/mtItem">维修条款</a></p>
+            我同意<a href="${rootUrl}/apple/mtItem">维修条款</a></p>
     <button type="" id="btn">提交信息</button></div></section></main>
     <%@include file="../inc/mtFooter.jsp" %>
     <script>

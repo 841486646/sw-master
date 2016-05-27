@@ -37,7 +37,7 @@ import com.swtec.sw.utils.exception.BizException;
  * @author shaowei
  */
 @Controller
-@RequestMapping("/mt")
+@RequestMapping("/apple")
 public class MaintainController extends BaseController {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	@Resource
