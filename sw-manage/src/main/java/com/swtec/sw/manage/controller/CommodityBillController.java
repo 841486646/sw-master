@@ -16,6 +16,8 @@ import com.swtec.sw.persist.model.CommodityBill;
 import com.swtec.sw.persist.model.ext.CommodityBillExt;
 import com.swtec.sw.service.CommodityBillService;
 import com.swtec.sw.utils.DataGrid;
+import com.swtec.sw.utils.RespResult;
+import com.swtec.sw.utils.enums.RespCode;
 
 @Controller
 @RequestMapping("/commodityBill")
@@ -43,4 +45,33 @@ public class CommodityBillController extends BaseController{
 		List<CommodityBill> bills = commodityBillService.list(commodityBillExt);
 		return new DataGrid(commodityBillExt.getTotal(), bills);
 	}
+	/**
+	 * 增加单号商品信息
+	 * @param request
+	 * @param model
+	 * @param commodityBill
+	 * @return
+	 */
+	@RequiresPermissions("warehouse:commodityBill:create")
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@ResponseBody
+	public RespResult save(HttpServletRequest request, ModelMap model, CommodityBill commodityBill) {
+		commodityBillService.insert(commodityBill);
+		return RespResult.getInstance(RespCode.SUCCESS);
+	}
+	/**
+	 * 更新一条单号商品信息
+	 * @param request
+	 * @param model
+	 * @param commodityBill
+	 * @return
+	 */
+	@RequiresPermissions("warehouse:commodityBill:update")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public RespResult update(HttpServletRequest request, ModelMap model, CommodityBill commodityBill) {
+		commodityBillService.update(commodityBill);
+		return RespResult.getInstance(RespCode.SUCCESS);
+	}
+
 }

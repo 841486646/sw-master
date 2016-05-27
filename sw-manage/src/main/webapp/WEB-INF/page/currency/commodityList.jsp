@@ -64,7 +64,11 @@
 			 var companyType=row[0].companyType;
 			 //id
 			 var commodityId=row[0].id;
-			 addrows(categoryName,commodityName,unitPrice,companyType,commodityId);
+			 if('${type}'==0){
+				 addrows(categoryName,commodityName,unitPrice,companyType,commodityId);
+			 }else{
+				 addUpdateRows(categoryName,commodityName,unitPrice,companyType,commodityId);
+			 }
 			 $('#openCommodityDialog').dialog("close");
 		}
 	});
@@ -77,6 +81,41 @@
 	    	commodityNumber: 1,
 	    	unitPrice:unitPrice
 	    });
+	}
+	function addUpdateRows(categoryName,commodityName,unitPrice,companyType,commodityId) {
+	    $.ajax({
+            async:false,
+            url:"<%=rootUrl%>/commodityBill/save",
+            type:"POST",
+            dataType:"json",
+            data:{commodityId:commodityId,commodityNumber:1,unitPrice:unitPrice,billId:'${billId}'},
+            beforeSend:function(){
+                showLoading();
+            },
+            success:function(data) {
+                hideLoading();
+                if(0==data.code){
+                    $.messager.show({
+                        title:'提示',
+                        msg:data.msg
+                    });
+                    $('#updateBilldatagrid').datagrid('reload');
+                } else {
+                    $.messager.show({
+                        title:'错误',
+                        msg:data.msg
+                    });
+                }
+            },
+            error:function(xhr,status,e){
+                hideLoading();
+                //服务器响应失败时的处理函数
+                $.messager.show({
+                    title:'错误',
+                    msg:'服务器请求失败.'
+                });
+            }
+        });
 	}
 	</script>
 </body>

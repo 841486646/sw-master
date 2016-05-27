@@ -14,5 +14,71 @@
 		from 
 		sw_commodity c 
 		LEFT JOIN sw_commodity_category cc ON cc.id=c.commodity_category_id 
-	</select>    
+	</select>
+	 <update id="updateByIdCommodity" parameterType="com.swtec.sw.persist.model.Commodity" >
+    update sw_commodity
+    <set >
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCategoryId != null" >
+        commodity_category_id = #{commodityCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseType != null" >
+        warehouse_type = #{warehouseType,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        bar_code = #{barCode,jdbcType=INTEGER},
+      </if>
+      <if test="commodityIdentifier != null" >
+        commodity_identifier = #{commodityIdentifier,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="sellingPrice != null" >
+        selling_price = #{sellingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="wholesalePrice != null" >
+        wholesale_price = #{wholesalePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null" >
+        cost_price = #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="companyType != null" >
+        company_type = #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="upperLimitNumber != null" >
+        upper_limit_number = upper_limit_number+#{upperLimitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="lowerNumber != null" >
+        lower_number = lower_number+#{lowerNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commodityNumber != null" >
+        commodity_number = commodity_number+#{commodityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userUpdateId != null" >
+        user_update_id = #{userUpdateId,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

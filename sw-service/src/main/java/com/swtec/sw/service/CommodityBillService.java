@@ -12,7 +12,7 @@ public interface CommodityBillService extends BaseService{
 	 * @param customer
 	 * @return
 	 */
-	List<CommodityBill> list( CommodityBillExt commodityBillExt);
+	List<CommodityBill> list(CommodityBillExt commodityBillExt);
 	
 	/**
 	 * 增加
@@ -31,5 +31,12 @@ public interface CommodityBillService extends BaseService{
 	 * @param id
 	 */
 	public void delete(Integer ids);
+	
+	/**
+	 * 查询是否重复
+	 * @param billId
+	 * @return
+	 */
+	int selectWhetherToRepeat(Integer billId);
 	
 }

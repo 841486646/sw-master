@@ -47,13 +47,26 @@ public class CurrencyController {
 	 * 跳转商品页面
 	 * @param request
 	 * @param model
+	 * @param type 0：增加  1：修改
 	 * @return
 	 */
 	@RequiresPermissions("currency:company:view")
 	@RequestMapping(value = "/commodityList", method = RequestMethod.GET)
-	public String commodityList(HttpServletRequest request, ModelMap model) {
+	public String commodityList(HttpServletRequest request, ModelMap model,Integer type,Integer billId) {
 		model.addAttribute("companyTypes", CompanyType.values());
 		model.addAttribute("warehouseTypes", WarehouseType.values());
+		model.addAttribute("type", type);
+		model.addAttribute("billId", billId);
 		return "currency/commodityList";
+	}
+	/**
+	 * 跳转到单号详情页面
+	 */
+	@RequiresPermissions("currency:company:rkBillView")
+	@RequestMapping(value = "/toRkCommodityBill", method = RequestMethod.GET)
+	public String toRkCommodityBill(HttpServletRequest request,Integer biiId, ModelMap model) {
+		model.addAttribute("biiId",biiId);
+		model.addAttribute("companyTypes", CompanyType.values());
+		return "currency/rkCommodityBill";
 	}
 }

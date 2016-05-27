@@ -14,8 +14,8 @@
     				<td>入库类别:</td>
     				<td>
     					<select name="type" class="easyui-combobox"  data-options="validType:'selectValueRequired'" name="type" style="width: 200px;">
-                			<option value="">--请选择--</option>
-                    			<c:forEach items="${billRKTypes }" var="billRKType">
+                				<option value="">--请选择--</option>
+                    		<c:forEach items="${billRKTypes }" var="billRKType">
                         		<option value="${billRKType }" >${billRKType.info }</option>
                    			</c:forEach>
                 		</select>
@@ -59,7 +59,7 @@
     	        {
     	            field: 'commodityName',
     	            title: '商品名称',
-    	            width: "18%",
+    	            width: "15%",
     	        },
     	        {
     	            field: 'companyType',
@@ -80,7 +80,8 @@
     	            editor: {
     	                type: 'validatebox',
     	                options: {
-    	                    validType: 'unsignedint'
+    	                    validType: 'unsignedint',
+    	                    required:true
     	                }
     	            }
     	        },
@@ -92,7 +93,8 @@
     	            editor: {
     	                type: 'validatebox',
     	                options: {
-    	                    validType: 'money'
+    	                    validType: 'money',
+    	                    required:true
     	                }
     	            }
     	        },
@@ -168,7 +170,7 @@
                 height: 500,
                 closed: false,
                 cache: false,
-                href: '<%=rootUrl%>/currency/commodityList',
+                href: '<%=rootUrl%>/currency/commodityList?type='+0,
                 modal: true,
                 onClose: function () {  
                 	$(this).dialog('destroy');//销毁  

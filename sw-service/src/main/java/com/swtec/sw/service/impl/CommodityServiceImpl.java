@@ -76,7 +76,6 @@ public class CommodityServiceImpl extends BaseServiceImpl implements CommoditySe
 				|| commodity.getUpperLimitNumber() ==null
 				|| commodity.getUpperLimitNumber() ==0
 				|| commodity.getLowerNumber() == null 
-				|| MyStringUtil.isEmpty(commodity.getCommodityIdentifier())
 				||commodity.getWholesalePrice() == null){
 			throw new BizException(RespCode.REQ_PARAM_ERROR);
 		}
@@ -143,6 +142,25 @@ public class CommodityServiceImpl extends BaseServiceImpl implements CommoditySe
 			throw new DbException(RespCode.DB_ERROR, e);
 		}
 		return commoditys;
+	}
+
+	@Override
+	public void updateByIdCommodity(Commodity commodity) {
+		if(commodity==null){
+			throw new BizException(RespCode.REQ_PARAM_ERROR);
+		}
+		if(commodity.getId()==null || commodity.getId()==0){
+			throw new BizException(RespCode.REQ_ID_ERROR);
+		}
+		int effectLine = 0;
+		try {
+			effectLine = commodityMapperExt.updateByIdCommodity(commodity);
+		} catch (Exception e) {
+			throw new DbException(RespCode.DB_ERROR, e);
+		}
+		if(effectLine == 0){
+			throw new BizException(RespCode.DB_ERROR_EFFECT_LINE);
+		}
 	}
 
 }

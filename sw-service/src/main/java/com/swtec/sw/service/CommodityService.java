@@ -35,6 +35,11 @@ public interface CommodityService extends BaseService{
 	 * @param commodity
 	 */
 	void update(Commodity commodity);
+	/**
+	 * 更新 库存数量相加
+	 * @param commodity
+	 */
+	void updateByIdCommodity(Commodity commodity);
 	
 	/**
 	 * 删除商品

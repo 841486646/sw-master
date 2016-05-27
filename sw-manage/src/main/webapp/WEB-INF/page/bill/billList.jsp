@@ -3,8 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%@include file="../inc/head.jsp"%>
-    <title>供应商管理</title>
-
+    <title>入库管理</title>
     <!-- 工具栏 -->
     <div id="toolbarTblBill">
         <div>
@@ -22,10 +21,11 @@
     <!-- 表格 -->
     <table id="tblBill" style="width: 98%;" class="easyui-datagrid"></table>
     <div id="insertBillDialog"></div>
+    <div id="updateBillDialog"></div>
     <script type="text/javascript">
         $(function(){
             $("#tblBill").datagrid({
-                url:"<%=rootUrl%>/bill/commodityStorageList.grid",
+                url:"<%=rootUrl%>/bill/commodityStorageList.grid?state="+'sh_in',
                 columns:[[
                     {field:'orderNumber',title:'入库单号',width:50},
                     {field:'totalPrice',title:'总价格',width:50},
@@ -80,7 +80,6 @@
         //删除供应商
         function deleteRole(){
             var row=$('#tblBill').datagrid("getSelected");
-            console.log(row);
             if(row){
                 $.messager.confirm('提示','确定删除该数据吗?',function(r) {
                     if(r){
@@ -129,18 +128,58 @@
         
         //入库的操作
         function rk_storage(){
-        	$.messager.confirm('确认', '您确定入库吗?入库将会改变商品库存数量!',
-            	    function(r) {
-            	        if (r) {
-            	        }
-            	    });
+        	var row=$('#tblBill').datagrid("getSelected");
+            if(row){
+                $.messager.confirm('提示','您确定入库操作吗?入库将会改变商品库存数量！',function(r) {
+                    if(r){
+                        $.ajax({
+                            async:false,
+                            url:"<%=rootUrl%>/bill/updateBill",
+                            type:"POST",
+                            dataType:"json",
+                            data:{id:row.id},
+                            beforeSend:function(){
+                                showLoading();
+                            },
+                            success:function(data) {
+                                hideLoading();
+                                if(0==data.code){
+                                    $.messager.show({
+                                        title:'提示',
+                                        msg:data.msg
+                                    });
+                                    $('#tblBill').datagrid('reload');
+                                } else {
+                                    $.messager.show({
+                                        title:'错误',
+                                        msg:data.msg
+                                    });
+                                }
+                            },
+                            error:function(xhr,status,e){
+                                hideLoading();
+                                //服务器响应失败时的处理函数
+                                $.messager.show({
+                                    title:'错误',
+                                    msg:'服务器请求失败.'
+                                });
+                            }
+                        });
+                    }
+                });
+            } else {
+                $.messager.show({
+                    title : '提示',
+                    msg : '请选择一条记录.'
+                });
+            }
         }
         //增加订单
         function showAddDialog(){
            $('#insertBillDialog').dialog({
                 title: '新增入库单',
-                width: 900,
-                height: 500,
+                width: 950,
+                height: 550,
                 closed: false,
                 cache: false,
                 href: '<%=rootUrl%>/bill/toInsertBill',
@@ -150,9 +189,8 @@
         
         function showUpdateDialog(){
         	var row=$('#tblBill').datagrid("getSelected");
-        	console.log(row);
             if(row){
-            	$('#insertBillDialog').dialog({
+            	$('#updateBillDialog').dialog({
                     title: '修改入库单',
                     width: 900,
                     height: 600,

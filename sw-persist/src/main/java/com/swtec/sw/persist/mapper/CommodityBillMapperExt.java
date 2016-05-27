@@ -12,4 +12,10 @@ public interface CommodityBillMapperExt extends CommodityBillMapper {
 	 * @return
 	 */
 	List<CommodityBill> selectCommodityBillList(CommodityBillExample example);
+	/**
+	 * 查询是否重复
+	 * @param billId
+	 * @return
+	 */
+	int selectWhetherToRepeat(int billId);
 }

@@ -5,7 +5,7 @@
     <%@include file="../inc/head.jsp"%>
     <title>商品入库录入</title>
 <body style="text-align:center">
-    <form id="insertBillForm">
+    <form id="updateBillForm">
     	<div style=" margin:0 auto; width:850px;">
     		<table>
     			<tr>
@@ -42,11 +42,11 @@
     		</table>
     	</div>
     </form>
-    	<table id="insertBilldatagrid" style="width: 98%;" class="easyui-datagrid"></table>
+    	<table id="updateBilldatagrid" style="width: 98%;" class="easyui-datagrid"></table>
     	<div id="openCommodityDialog"></div>
     	<script type="text/javascript">
     	$(function() {
-    	    $('#insertBilldatagrid').datagrid({
+    	    $('#updateBilldatagrid').datagrid({
     	    	 method:"POST",
     	    	url:"<%=rootUrl%>/commodityBill/commodityBillList.grid?billId="+'${billView.id}',
     	        columns: [[
@@ -77,7 +77,8 @@
     	            editor: {
     	                type: 'validatebox',
     	                options: {
-    	                    validType: 'unsignedint'
+    	                    validType: 'unsignedint',
+    	                    required:true
     	                }
     	            }
     	        },
@@ -89,7 +90,8 @@
     	            editor: {
     	                type: 'validatebox',
     	                options: {
-    	                    validType: 'money'
+    	                    validType: 'money',
+    	                    required:true
     	                }
     	            }
     	        },
@@ -120,7 +122,7 @@
     	        toolbar: [{
     	            text: '添加商品',
     	            iconCls: 'icon-add',
-    	            handler: addrow
+    	            handler: addUpdateRows
     	        },
     	        {
     	            text: '保存',
@@ -129,50 +131,98 @@
     	        }],
     	        onBeforeEdit: function(index, row) {
     	            row.editing = true;
-    	            $('#insertBilldatagrid').datagrid('refreshRow', index);
+    	            $('#updateBilldatagrid').datagrid('refreshRow', index);
     	            editcount++
     	        },
     	        onAfterEdit: function(index, row) {
     	            row.editing = false;
-    	            $('#insertBilldatagrid').datagrid('refreshRow', index);
+    	            $('#updateBilldatagrid').datagrid('refreshRow', index);
     	            editcount--
     	        },
     	        onCancelEdit: function(index, row) {
     	            row.editing = false;
-    	            $('#insertBilldatagrid').datagrid('refreshRow', index);
+    	            $('#updateBilldatagrid').datagrid('refreshRow', index);
     	            editcount--
     	        }
     	    });
     	});
     	var editcount = 0;
     	function editrow(index) {
-    	    $('#insertBilldatagrid').datagrid('beginEdit',index);
+    	    $('#updateBilldatagrid').datagrid('beginEdit',index);
     	}
     	function deleterow(index) {
     	    $.messager.confirm('确认', '您确定删除吗?',
     	    function(r) {
     	        if (r) {
-    	            $('#insertBilldatagrid').datagrid('deleteRow', index);
-    	            $('#insertBilldatagrid').datagrid('refreshRow',index);
+    	            $('#updateBilldatagrid').datagrid('deleteRow', index);
+    	            $('#updateBilldatagrid').datagrid('refreshRow',index);
     	        }
     	    })
     	}
     	function saverow(index) {
-    	    $('#insertBilldatagrid').datagrid('endEdit', index)
+    		var row=$('#updateBilldatagrid').datagrid("getSelected");
+            if(row){
+            	$('#updateBilldatagrid').datagrid('endEdit', index);
+                $.messager.confirm('提示','您确定修改此信息吗？',function(r) {
+                    if(r){
+                        $.ajax({
+                            async:false,
+                            url:"<%=rootUrl%>/commodityBill/update",
+                            type:"POST",
+                            dataType:"json",
+                            data:{id:row.id,commodityNumber:row.commodityNumber,unitPrice:row.unitPrice},
+                            beforeSend:function(){
+                                showLoading();
+                            },
+                            success:function(data) {
+                                hideLoading();
+                                if(0==data.code){
+                                    $.messager.show({
+                                        title:'提示',
+                                        msg:data.msg
+                                    });
+                                    $('#updateBilldatagrid').datagrid('reload');
+                                } else {
+                                    $.messager.show({
+                                        title:'错误',
+                                        msg:data.msg
+                                    });
+                                }
+                            },
+                            error:function(xhr,status,e){
+                                hideLoading();
+                                //服务器响应失败时的处理函数
+                                $.messager.show({
+                                    title:'错误',
+                                    msg:'服务器请求失败.'
+                                });
+                            }
+                        });
+                    }
+                });
+            } else {
+                $.messager.show({
+                    title : '提示',
+                    msg : '请选择一条记录.'
+                });
+            }
     	}
     	function cancelrow(index) {
-    	    $('#insertBilldatagrid').datagrid('cancelEdit', index)
+    	    $('#updateBilldatagrid').datagrid('cancelEdit', index)
     	}
     	//新增操作
-    	function addrow() {
+    	function addUpdateRows() {
     		$('#openCommodityDialog').dialog({
                 title: '商户列表',
                 width: 800,
                 height: 600,
                 closed: false,
                 cache: false,
-                href: '<%=rootUrl%>/currency/commodityList',
-                modal: true
+                href: '<%=rootUrl%>/currency/commodityList?type='+1+"&billId="+'${billView.id}',
+                modal: true,
+                onClose: function () {  
+                	$(this).dialog('destroy');//销毁  
+                }
             });
     	}
     	function saveall() {
@@ -181,11 +231,11 @@
     	        return false;
     	    }
     		//获取所有加载的数据
-    		var row=$('#insertBilldatagrid').datagrid("getData");
+    		var row=$('#updateBilldatagrid').datagrid("getData");
     		  //保存
-            	enableValidateWhenSubmit('insertBillForm');
-                if($('#insertBillForm').form('validate')){
-                	var data={bill:$('#insertBillForm').serialize(),commodityNames:row.rows[0]};
+            	enableValidateWhenSubmit('updateBillForm');
+                if($('#updateBillForm').form('validate')){
+                	var data={bill:$('#updateBillForm').serialize(),commodityNames:row.rows[0]};
                 	//获取时间
                 	var createTime = $('#createTime').datebox('getValue');
                 	var obj = [];
@@ -197,11 +247,11 @@
                 	   person.commodityNumber = row.rows[i].commodityNumber;
                 	   //单价
                 	   person.unitPrice = row.rows[i].unitPrice;
-                	obj.push(person);
+                	   obj.push(person);
                 	}
                     $.ajax({
                         async:false,
-                        url:"<%=rootUrl%>/bill/saveBill?billObj="+JSON.stringify(obj)+"&bill="+$('#insertBillForm').serialize()+"&createTimes="+createTime,
+                        url:"<%=rootUrl%>/bill/updateCommodityBill?billObj="+JSON.stringify(obj)+"&bill="+$('#updateBillForm').serialize()+"&createTimes="+createTime,
                         type:"POST",
                         dataType:"json",
                         data:null,
@@ -215,8 +265,7 @@
                                     title:'提示',
                                     msg:data.msg
                                 });
-                                $('#insertBillForm').form("clear");
-                                $('#insertBillDialog').dialog("close");
+                                $('#updateBillDialog').dialog("close");
                                 $("#tblBill").datagrid("reload");
                             } else {
                                 $.messager.show({
@@ -237,7 +286,7 @@
                 }
     	}
     	function cancelall() {
-    	    $('#insertBilldatagrid').datagrid('rejectChanges')
+    	    $('#updateBilldatagrid').datagrid('rejectChanges')
     	}
     	</script>
     </body>

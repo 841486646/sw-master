@@ -54,6 +54,15 @@ public class CommodityBillServiceImpl extends BaseServiceImpl implements Commodi
 		if(commodityBill == null){
 			throw new BizException(RespCode.REQ_PARAM_ERROR);
 		}
+		if(commodityBill.getBillId() == null 
+			|| commodityBill.getBillId() == 0 
+			|| commodityBill.getCommodityId()==0
+			|| commodityBill.getCommodityId()==null
+			|| commodityBill.getCommodityNumber()==0
+			|| commodityBill.getCommodityNumber()==null
+			|| commodityBill.getUnitPrice()==null){
+			throw new BizException(RespCode.REQ_PARAM_ERROR);
+		}
 		int effectLine = 0;
 		try {
 			effectLine = commodityBillMapperExt.insertSelective(commodityBill);
@@ -73,6 +82,11 @@ public class CommodityBillServiceImpl extends BaseServiceImpl implements Commodi
 		if(commodityBill.getId()==null || commodityBill.getId()==0){
 			throw new BizException(RespCode.REQ_ID_ERROR);
 		}
+		if(commodityBill.getCommodityNumber()==0
+				|| commodityBill.getCommodityNumber()==null
+				|| commodityBill.getUnitPrice()==null){
+				throw new BizException(RespCode.REQ_PARAM_ERROR);
+			}
 		int effectLine = 0;
 		try {
 			effectLine = commodityBillMapperExt.updateByPrimaryKeySelective(commodityBill);
@@ -100,4 +114,17 @@ public class CommodityBillServiceImpl extends BaseServiceImpl implements Commodi
 		}
 	}
 
+	@Override
+	public int selectWhetherToRepeat(Integer billId) {
+		if(billId == null || billId == 0){
+			throw new BizException(RespCode.REQ_ID_ERROR);
+		}
+		int effectLine = 0;
+		try {
+			effectLine=commodityBillMapperExt.selectWhetherToRepeat(billId);
+		} catch (Exception e) {
+			throw new DbException(RespCode.DB_ERROR, e);
+		}
+		return effectLine;
+	}
 }

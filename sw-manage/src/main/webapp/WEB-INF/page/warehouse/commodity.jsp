@@ -54,7 +54,7 @@
         		</tr>
         		<tr>
         			<td class="tdHeight"><label>商品编号：</label> </td>
-        			<td><input name="commodityIdentifier" class="easyui-validatebox" maxlength="20"  data-options="required:true" /><span class="spanRequired">*</span></td>
+        			<td><input name="commodityIdentifier" class="easyui-validatebox" maxlength="20" /></td>
         			<td><label>规格/型号：</label></td>
         			<td><input name="model" class="easyui-validatebox" maxlength="60"  /></td>
         		</tr>
@@ -108,7 +108,7 @@
         		</tr>
         		<tr>
         			<td class="tdHeight"><label>库存数量：</label> </td>
-        			<td><input  value="0" readonly="readonly" class="easyui-numberbox" /></td>
+        			<td><input  value="0" readonly="readonly" disabled="disabled" class="easyui-numberbox" /></td>
         		</tr>
         		<tr >
         			<td class="tdHeight"><label>备注：</label> </td>
@@ -139,7 +139,7 @@
         		</tr>
         		<tr>
         			<td class="tdHeight"><label>商品编号：</label> </td>
-        			<td><input name="commodityIdentifier" class="easyui-validatebox" maxlength="20"  data-options="required:true" /><span class="spanRequired">*</span></td>
+        			<td><input name="commodityIdentifier" class="easyui-validatebox" maxlength="20"  /></td>
         			<td><label>规格/型号：</label> </td>
         			<td><input name="model" class="easyui-validatebox" maxlength="60"  /></td>
         		</tr>

@@ -13,9 +13,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.swtec.sw.persist.mapper.BillMapperExt;
 import com.swtec.sw.persist.mapper.CommodityBillMapperExt;
+import com.swtec.sw.persist.mapper.CommodityMapperExt;
 import com.swtec.sw.persist.mapper.UserMapperExt;
 import com.swtec.sw.persist.model.Bill;
 import com.swtec.sw.persist.model.BillExample;
+import com.swtec.sw.persist.model.Commodity;
 import com.swtec.sw.persist.model.CommodityBill;
 import com.swtec.sw.persist.model.CommodityBillExample;
 import com.swtec.sw.persist.model.Resource;
@@ -42,10 +44,17 @@ public class BillServiceImpl extends BaseServiceImpl implements BillService{
 	@javax.annotation.Resource
 	private UserMapperExt userMapperExt;
 	
+	@javax.annotation.Resource
+	private CommodityMapperExt commodityMapperExt;
+	
 	@Override
 	public List<Bill> list(BillExt billExt) {
 		BillExample selParam=new BillExample();
 		BillExample.Criteria cri=selParam.createCriteria();
+		//根据单号状态查询
+		if(!MyStringUtil.isEmpty(billExt.getState()) ){
+			cri.andStateEqualTo(billExt.getState());
+		}
 		selParam.setPageSize(billExt.getRows());
 		selParam.setPageBegin(getBegin(billExt.getPage(), billExt.getRows()));
 		List<Bill> suppliers=null;
@@ -86,7 +95,7 @@ public class BillServiceImpl extends BaseServiceImpl implements BillService{
 	        	Double commodityNumber = obj.getDouble("commodityNumber");
 	        	Double unitPrice = obj.getDouble("unitPrice");
 	        	Double totalPrice=MyStringUtil.mul(unitPrice, commodityNumber);
-	        	totalPrices=totalPrice+i;
+	        	totalPrices+=totalPrice;
 	        	bill.setTotalPrice(BigDecimal.valueOf(totalPrices));
 			}
 				effectLine = billMapperExt.insertSelective(bill);
@@ -124,6 +133,7 @@ public class BillServiceImpl extends BaseServiceImpl implements BillService{
 		}
 		int effectLine = 0;
 		try {
+			bill.setState("sh_success");
 			effectLine = billMapperExt.updateByPrimaryKeySelective(bill);
 		} catch (Exception e) {
 			throw new DbException(RespCode.DB_ERROR, e);
@@ -158,6 +168,48 @@ public class BillServiceImpl extends BaseServiceImpl implements BillService{
 			throw new DbException(RespCode.REQ_ID_ERROR, e);
 		}
 		return resource;
+	}
+
+	@SuppressWarnings("unused")
+	@Override
+	public void updateComBill(HttpServletRequest request, Bill bill) {
+		CommodityBill commodityBill=new CommodityBill();
+		String billObj=request.getParameter("billObj");
+		String id=request.getParameter("id");
+		//获取当前录入时间
+		String createTime=request.getParameter("createTimes");
+		bill.setCreateTime(DateUtil.stringDate(createTime));
+		bill.setId(Integer.valueOf(id));
+		JSONObject object = new JSONObject();
+        JSONArray array = JSON.parseArray(billObj);
+		if(bill == null){
+			throw new BizException(RespCode.REQ_PARAM_ERROR);
+		}
+		//录入的商品不能为空
+		if(array.size()==0 || array==null){
+			throw new BizException(RespCode.COMMODITY_NOTNULL_ERROR);
+		}
+		int effectLine = 0;
+		try {
+			JSONObject obj = new JSONObject();
+			Double totalPrices=0.00;
+			for (int i = 0; i < array.size(); i++) {
+	        	String str = array.get(i)+"";
+	        	obj = JSON.parseObject(str);
+	        	//商品数量*商品单价=总价
+	        	Double commodityNumber = obj.getDouble("commodityNumber");
+	        	Double unitPrice = obj.getDouble("unitPrice");
+	        	Double totalPrice=MyStringUtil.mul(unitPrice, commodityNumber);
+	        	totalPrices+=totalPrice;
+	        	bill.setTotalPrice(BigDecimal.valueOf(totalPrices));
+			}
+				effectLine = billMapperExt.updateByPrimaryKeySelective(bill);
+		} catch (Exception e) {
+			throw new DbException(RespCode.DB_ERROR, e);
+		}
+		if(effectLine != 1){
+			throw new BizException(RespCode.DB_ERROR_EFFECT_LINE);
+		}
 	}
 	
 }

@@ -9,6 +9,8 @@
 	    <result column="commodity_number" property="commodityNumber" jdbcType="INTEGER" />
    	    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
    	    <result column="id" property="id" jdbcType="INTEGER" />
+   	    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+   	    <result column="bill_id" property="billId" jdbcType="INTEGER" />
 	  </resultMap>
 	  <!-- 入库单号里面商品查询 -->
 	  <select id="selectCommodityBillList" resultMap="findCommodityAndBillMap" parameterType="com.swtec.sw.persist.model.CommodityBillExample" >
@@ -16,6 +18,8 @@
 	  	select  cc.category_name,
 	  			c.commodity_name,
 	  			c.company_type,
+	  			cb.commodity_id,
+	  			cb.bill_id,
 	  			cb.commodity_number,
 	  			cb.unit_price,
 	  			cb.id 
@@ -29,5 +33,9 @@
       			order by ${orderByClause}
     		</if>
 		<include refid="Pageable_Suffix" />
+	  </select>
+	  <!-- 判断是否重复 -->
+	  <select id="selectWhetherToRepeat" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	  	select count(*)  from sw_commodity_bill WHERE bill_id=#{billId} group by commodity_id having count(*)>1;
 	  </select>
 </mapper>

@@ -32,6 +32,8 @@ public interface BillService extends BaseService{
 	 */
 	public void update(Bill bill);
 	
+	public void updateComBill(HttpServletRequest request,Bill bill);
+	
 	/**
 	 * 删除
 	 * @param id

@@ -1,7 +1,6 @@
 package com.swtec.sw.manage.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swtec.sw.persist.enums.BillRKType;
 import com.swtec.sw.persist.enums.CompanyType;
-import com.swtec.sw.persist.enums.WarehouseType;
 import com.swtec.sw.persist.model.Bill;
 import com.swtec.sw.persist.model.Commodity;
 import com.swtec.sw.persist.model.CommodityBill;
@@ -23,11 +21,6 @@ import com.swtec.sw.persist.model.ext.BillExt;
 import com.swtec.sw.persist.model.ext.CommodityBillExt;
 import com.swtec.sw.persist.model.ext.CommodityExt;
 import com.swtec.sw.persist.model.ext.UserExt;
-/**
- * 单据控制器（包括入库、出库、销售出库等）
- * @author chengkang
- *
- */
 import com.swtec.sw.service.BillService;
 import com.swtec.sw.service.CommodityBillService;
 import com.swtec.sw.service.CommodityService;
@@ -37,6 +30,11 @@ import com.swtec.sw.utils.DateUtil;
 import com.swtec.sw.utils.MyStringUtil;
 import com.swtec.sw.utils.RespResult;
 import com.swtec.sw.utils.enums.RespCode;
+/**
+ * 单据控制器（包括入库、出库、销售出库等）
+ * @author chengkang
+ *
+ */
 @Controller
 @RequestMapping("/bill")
 public class BillController extends BaseController{
@@ -150,5 +148,98 @@ public class BillController extends BaseController{
 		List<Commodity> commodityList=commodityService.notPageList(commodity);
 		model.addAttribute("commodityList", commodityList);
 		return "bill/updateBill";
+	}
+	/**
+	 * 更新一条数据
+	 * @param request
+	 * @param model
+	 * @param bill
+	 * @return
+	 */
+	@RequiresPermissions("warehouse:bill:updateBill")
+	@RequestMapping(value = "/updateBill", method = RequestMethod.POST)
+	@ResponseBody
+	public RespResult update(HttpServletRequest request, ModelMap model, Bill bill) {
+		//根据session获取当前修改人的id
+		User user=this.getCurrentUser(request);
+		if(user.getId() != null){
+			bill.setExamineUserId(String.valueOf(user.getId()));
+		}
+		billService.update(bill);
+		//根据biiId获取商品单号里面商品信息，并且进行入库的操作
+		if(bill.getId()!=null){
+			CommodityBillExt commodityBillExt=new CommodityBillExt();
+			commodityBillExt.setBillId(bill.getId());
+			commodityBillExt.setRows(50);
+			List<CommodityBill> list=commodityBillService.list(commodityBillExt);
+			if(list.size()!=0 || list!=null){
+				for (int i = 0; i < list.size(); i++) {
+					Commodity commodity=new Commodity();
+					commodity.setId(list.get(i).getCommodityId());
+					//跟新库存数量
+					commodity.setCommodityNumber(list.get(i).getCommodityNumber());
+					commodityService.updateByIdCommodity(commodity);
+				}
+			}
+		}
+		return RespResult.getInstance(RespCode.SUCCESS);
+	}
+	/**
+	 * 跳转到商品入库查询页面
+	 */
+	@RequiresPermissions("warehouse:bill:billView")
+	@RequestMapping(value = "/toBillEarchList", method = RequestMethod.GET)
+	public String toBillEarchList(HttpServletRequest request, ModelMap model) {
+		UserExt user=new UserExt();
+		List<User> usersList=userService.notPageList(user);
+		model.addAttribute("usersList", usersList);
+		model.addAttribute("billRKTypes", BillRKType.values());
+		return "bill/billEarchList";
+	}
+	/**
+	 * 查询入库查询信息
+	 */
+	@RequiresPermissions("warehouse:bill:billView")
+	@RequestMapping(value = "/commodityEarchList.grid", method = RequestMethod.POST)
+	@ResponseBody
+	public DataGrid commodityEarchList(HttpServletRequest request, ModelMap model, BillExt billExt) {
+		List<Bill> bills = billService.list(billExt);
+		return new DataGrid(billExt.getTotal(), bills);
+	}
+	/**
+	 * 跟新商品单号信息
+	 * @param request
+	 * @param model
+	 * @param bill
+	 * @return
+	 */
+	@RequiresPermissions("warehouse:bill:updateBill")
+	@RequestMapping(value = "/updateCommodityBill", method = RequestMethod.POST)
+	@ResponseBody
+	public RespResult updateBill(HttpServletRequest request, ModelMap model, Bill bill) {
+		billService.updateComBill(request,bill);
+		return RespResult.getInstance(RespCode.SUCCESS);
+	}
+	/**
+	 * 跳转到入库商品查询
+	 */
+	@RequiresPermissions("warehouse:bill:rkBillView")
+	@RequestMapping(value = "/toRKCommodityBillList", method = RequestMethod.GET)
+	public String toRKCommodityBillList(HttpServletRequest request, ModelMap model) {
+		UserExt user=new UserExt();
+		List<User> usersList=userService.notPageList(user);
+		model.addAttribute("usersList", usersList);
+		model.addAttribute("billRKTypes", BillRKType.values());
+		return "bill/rkBillList";
+	}
+	/**
+	 * 入库商品查询
+	 */
+	@RequiresPermissions("warehouse:bill:rkBillView")
+	@RequestMapping(value = "/RKCommodityBillList.grid", method = RequestMethod.POST)
+	@ResponseBody
+	public DataGrid RKCommodityBillList(HttpServletRequest request, ModelMap model, BillExt billExt) {
+		List<Bill> bills = billService.list(billExt);
+		return new DataGrid(billExt.getTotal(), bills);
 	}
 }
