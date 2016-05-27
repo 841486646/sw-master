@@ -60,7 +60,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /resources/** = anon
-                /mt/** = anon
+                /apple/** = anon
                 /logout = logout
                 /login = authc
                 /** = sysUser,user,perms,roles
