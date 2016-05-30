@@ -22,7 +22,7 @@
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/easyui/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/easyui-validate.js"></script>
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/mytool.js"></script>
-    <script type="text/javascript" src="<%=rootUrl %>/resources/js/ajaxfileupload.js"></script>
+    <script type="text/javascript" src="<%=rootUrl %>/resources/js/ajaxfileupload.js?t=2015"></script>
 
     <!-- Favicons -->
     <link rel="icon" href="<%=rootUrl %>/resources/images/logo.ico" type="image/x-icon" />
