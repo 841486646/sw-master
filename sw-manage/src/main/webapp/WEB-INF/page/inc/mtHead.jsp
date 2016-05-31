@@ -11,8 +11,8 @@
         + request.getContextPath();
 %>
 <c:set var="rootUrl" value="<%=rootUrl%>"></c:set>
-<c:set var="rootImgUrl" value="${rootUrl}/resources/images/"></c:set>
-<c:set var="rootUploadImgUrl" value="${rootUrl}/resources/images/mt/upload/"></c:set>
+<c:set var="rootImgUrl" value="http://o7zhzk6dq.bkt.clouddn.com/mt/"></c:set>
+<c:set var="rootUploadImgUrl" value="http://o7zhzk6dq.bkt.clouddn.com/mt/upload/"></c:set>
     <script type="text/javascript">var CONTEXT_PATH='<%=rootUrl%>';</script>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="<%=rootUrl %>/resources/css/mt/style.css"/>

@@ -25,6 +25,7 @@ import com.swtec.sw.persist.model.MtProduct;
 import com.swtec.sw.persist.model.ext.MtProductExt;
 import com.swtec.sw.service.mt.MtProductService;
 import com.swtec.sw.utils.DataGrid;
+import com.swtec.sw.utils.QiniuUpload;
 import com.swtec.sw.utils.RespResult;
 import com.swtec.sw.utils.enums.RespCode;
 import com.swtec.sw.utils.exception.BizException;
@@ -94,7 +95,7 @@ public class MtProductController extends BaseController{
 	}
 	
 	/**
-	 * 删除指定产品信息
+	 * 上传图片
 	 */
 	@RequiresPermissions("mt:product:upload")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -111,6 +112,7 @@ public class MtProductController extends BaseController{
 		String suffix = originFileName.substring(originFileName.lastIndexOf("."));
 		String newFileName = UUID.randomUUID().toString() + suffix;
 		try {
+			new QiniuUpload().upload(imgFile.getBytes(), "mt/upload/"+newFileName);
 			//这里使用Apache的FileUtils方法来进行保存
 			FileUtils.copyInputStreamToFile(imgFile.getInputStream(),
 					new File(realPath, newFileName));

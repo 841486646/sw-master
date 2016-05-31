@@ -31,10 +31,9 @@ public class MtOrderServiceImpl extends BaseServiceImpl implements MtOrderServic
 
 	@Override
 	public void insert(MtOrder mtOrder) {
-		if(mtOrder == null || MyStringUtil.isBlank(mtOrder.getRealName())
+		if(mtOrder == null
 				|| MyStringUtil.isBlank(mtOrder.getMobile())
-				|| MyStringUtil.isBlank(mtOrder.getMachineBugIds())
-				|| MyStringUtil.isBlank(mtOrder.getAddress())){
+				|| MyStringUtil.isBlank(mtOrder.getMachineBugIds())){
 			throw new BizException(RespCode.REQ_PARAM_ERROR);
 		}
 		

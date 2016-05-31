@@ -26,19 +26,19 @@
                 <li>邮政编码：100091</li>
                 <li>服务时间：9:00-20:00 周末无休</li>
                 <li>服务电话：400-6810-208</li>
-                <li><img src="<%=rootUrl %>/resources/images/mt/map.jpg" alt=""></li>
+                <li><img src="${rootImgUrl}map.jpg" alt=""></li>
             </ul>
         </div>
         <div class="about-content2">
             <ul class="clearfix">
                 <li>
                     <a href="tel:4006810208">
-                        <img src="<%=rootUrl %>/resources/images/mt/phone.png" alt="">
+                        <img src="${rootImgUrl}phone.png" alt="">
                         <p>9:00-20:00<br>电话客服</p>
                     </a>
                 </li>
                 <li><a href="http://www.computerfix.cn/shouji/contact.asp" target="_blank">
-                    <img src="<%=rootUrl %>/resources/images/mt/110105-1208.png" alt="">
+                    <img src="${rootImgUrl}110105-1208.png" alt="">
                     <p>9:00-20:00<br>在线客服</p>
                     </a>
                 </li>

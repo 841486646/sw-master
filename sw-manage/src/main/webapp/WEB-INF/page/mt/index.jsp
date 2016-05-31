@@ -22,9 +22,8 @@
         <%@include file="../inc/mtNav.jsp" %>
         <section class="focus-content">
 	        <ul>
-	            <li><a href="#"><img src="<%=rootUrl %>/resources/images/mt/banner1.jpg" alt=""></a></li>
-	            <li><a href="#"><img src="<%=rootUrl %>/resources/images/mt/banner2.jpg" alt=""></a></li>
-	            <li><a href="#"><img src="<%=rootUrl %>/resources/images/mt/banner3.jpg" alt=""></a></li>
+	            <li><a href="#"><img src="${rootImgUrl}banner1.jpg" alt=""></a></li>
+	            <li><a href="#"><img src="${rootImgUrl}banner2.jpg" alt=""></a></li>
 	        </ul>
 	        <ol></ol>
     	</section>
@@ -40,9 +39,9 @@
     <section class="otherchoice-content clearfix">
         <ul>
             <li><a href="#"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_1.png" alt=""></a></li>
-            <li><a href="${rootUrl}/apple/about"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_2.png" alt=""></a></li>
-            <li><a href="${rootUrl}/apple/guarantee"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_3.png" alt=""></a></li>
-            <li><a href="https://shop58866385.taobao.com/"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_4.png" alt=""></a></li>
+            <li><a href="${rootUrl}/apple/about"><img src="${rootImgUrl}otherchoice_2.png" alt=""></a></li>
+            <li><a href="${rootUrl}/apple/guarantee"><img src="${rootImgUrl}otherchoice_3.png" alt=""></a></li>
+            <li><a href="https://shop58866385.taobao.com/"><img src="${rootImgUrl}otherchoice_4.png" alt=""></a></li>
         </ul>
     </section>
     <%@include file="../inc/mtFooter.jsp" %>

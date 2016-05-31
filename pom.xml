@@ -365,6 +365,11 @@
 				<artifactId>javax.mail</artifactId>
 				<version>${javax.mail.version}</version>
 			</dependency>
+			<dependency>
+			    <groupId>com.qiniu</groupId>
+			    <artifactId>qiniu-java-sdk</artifactId>
+			    <version>7.0.0</version>
+		    </dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>

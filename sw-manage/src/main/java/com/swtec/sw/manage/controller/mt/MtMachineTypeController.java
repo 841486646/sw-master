@@ -26,6 +26,7 @@ import com.swtec.sw.persist.model.ext.MtMachineTypeExt;
 import com.swtec.sw.service.mt.MtMachineTypeService;
 import com.swtec.sw.service.mt.MtProductService;
 import com.swtec.sw.utils.DataGrid;
+import com.swtec.sw.utils.QiniuUpload;
 import com.swtec.sw.utils.RespResult;
 import com.swtec.sw.utils.enums.RespCode;
 import com.swtec.sw.utils.exception.BizException;
@@ -98,7 +99,7 @@ public class MtMachineTypeController extends BaseController{
 	}
 	
 	/**
-	 * 删除指定机型信息
+	 * 上传图片
 	 */
 	@RequiresPermissions("mt:machinetype:upload")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -115,6 +116,7 @@ public class MtMachineTypeController extends BaseController{
 		String suffix = originFileName.substring(originFileName.lastIndexOf("."));
 		String newFileName = UUID.randomUUID().toString() + suffix;
 		try {
+			new QiniuUpload().upload(imgFile.getBytes(), "mt/upload/"+newFileName);
 			//这里使用Apache的FileUtils方法来进行保存
 			FileUtils.copyInputStreamToFile(imgFile.getInputStream(),
 					new File(realPath, newFileName));

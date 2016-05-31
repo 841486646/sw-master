@@ -16,7 +16,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <%@include file="../inc/mtHead.jsp" %>
-    <title>关于我们</title>
+    <title>维修条款</title>
 </head>
 <body style="display: block;">
     <%@include file="../inc/mtNav.jsp" %>

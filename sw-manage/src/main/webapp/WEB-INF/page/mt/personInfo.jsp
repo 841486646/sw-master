@@ -20,8 +20,8 @@
 </head>
 <body style="display: block;">
 	<%@include file="../inc/mtNav.jsp" %>
-    <main class="wrap"><section class="fill-form"><ul><li><input type="text" placeholder="请输入您的姓名（必填）" name="name" id="name"></li><li><input type="text" placeholder="请输入能联系到您的手机号（必填）" name="phone" id="phone"></li><li><textarea class="fill-form-textarea" name="content" placeholder="请详细描述故障（非必填）" id="content" cols="30" rows="3"></textarea></li>
-    <li><input type="text" placeholder="请详细填写地址（必填）" name="address" id="address"></li>
+    <main class="wrap"><section class="fill-form"><ul><li><input type="text" placeholder="请输入您的姓名（非必填）" name="name" id="name"></li><li><input type="text" placeholder="请输入能联系到您的手机号（必填）" name="phone" id="phone"></li><li><textarea class="fill-form-textarea" name="content" placeholder="请详细描述故障（非必填）" id="content" cols="30" rows="3"></textarea></li>
+    <li><input type="text" placeholder="请详细填写地址（非必填）" name="address" id="address"></li>
     </ul><input type="hidden" name="orderid" id="orderid" value="0"><input type="hidden" name="pc_id" id="pc_id" value="1"><input type="hidden" name="pm_id" id="pm_id" value="6"><input type="hidden" name="pr_id" id="pr_id" value="7"><input type="hidden" name="pf_id" id="pf_id" value="7"><input type="hidden" name="machineBugIds" id="machineBugIds" value="${machineBugIds}"><div class="fill-form-btn">
     <p><input type="text" name="code" id="code">
     <img id="codeImg" onclick="javascript:refreshCode()" src="getValidCode" border="0" alt="验证码"></p>
