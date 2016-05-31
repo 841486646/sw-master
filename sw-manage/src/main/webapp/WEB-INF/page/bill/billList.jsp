@@ -183,7 +183,10 @@
                 closed: false,
                 cache: false,
                 href: '<%=rootUrl%>/bill/toInsertBill',
-                modal: true
+                modal: true,
+                onClose: function () {  
+                	$(this).dialog('destroy');//销毁  
+                }
             });
         }
         
@@ -195,6 +198,7 @@
                     width: 900,
                     height: 600,
                     closed: false,
+                    closable: false,
                     cache: false,
                     href: '<%=rootUrl%>/bill/toupdateBill?id='+row.id,
                     modal: true

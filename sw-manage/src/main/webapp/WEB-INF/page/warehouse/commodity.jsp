@@ -193,7 +193,7 @@
         		</tr>
         		<tr>
         			<td class="tdHeight"><label>库存数量：</label> </td>
-        			<td><input  name="commodityNumber" class="easyui-numberbox" /><span class="spanRequired">*</span></td>
+        			<td><input  readonly="readonly" disabled="disabled" name="commodityNumber" class="easyui-numberbox" /></td>
         		</tr>
         		<tr >
         			<td class="tdHeight"><label>备注：</label> </td>
