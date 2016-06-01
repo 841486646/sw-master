@@ -23,7 +23,7 @@
         <section class="focus-content">
 	        <ul>
 	            <li><a href="#"><img src="${rootImgUrl}banner1.jpg" alt=""></a></li>
-	            <li><a href="#"><img src="${rootImgUrl}banner2.jpg" alt=""></a></li>
+	            <li><a href="#"><img src="${rootImgUrl}banner2.jpg?t=2016" alt=""></a></li>
 	        </ul>
 	        <ol></ol>
     	</section>
