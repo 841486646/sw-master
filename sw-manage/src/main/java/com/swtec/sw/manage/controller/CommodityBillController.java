@@ -74,4 +74,19 @@ public class CommodityBillController extends BaseController{
 		return RespResult.getInstance(RespCode.SUCCESS);
 	}
 
+	/**
+	 * 删除单号下商品
+	 * @param request
+	 * @param model
+	 * @param id
+	 * @return
+	 */
+	@RequiresPermissions("warehouse:commodityBill:delete")
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public RespResult delete(HttpServletRequest request, ModelMap model, Integer id) {
+		commodityBillService.delete(id);
+		return RespResult.getInstance(RespCode.SUCCESS);
+	}
+
 }

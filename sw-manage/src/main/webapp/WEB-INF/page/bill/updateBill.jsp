@@ -151,13 +151,51 @@
     	    $('#updateBilldatagrid').datagrid('beginEdit',index);
     	}
     	function deleterow(index) {
-    	    $.messager.confirm('确认', '您确定删除吗?',
-    	    function(r) {
-    	        if (r) {
-    	            $('#updateBilldatagrid').datagrid('deleteRow', index);
-    	            $('#updateBilldatagrid').datagrid('refreshRow',index);
-    	        }
-    	    })
+    	        	 var row=$('#updateBilldatagrid').datagrid("getSelected");
+    	             if(row){
+    	                 $.messager.confirm('提示','确定删除该数据吗?',function(r) {
+    	                     if(r){
+    	                         $.ajax({
+    	                             async:false,
+    	                             url:"<%=rootUrl%>/commodityBill/delete",
+    	                             type:"POST",
+    	                             dataType:"json",
+    	                             data:{id:row.id},
+    	                             beforeSend:function(){
+    	                                 showLoading();
+    	                             },
+    	                             success:function(data) {
+    	                                 hideLoading();
+    	                                 if(0==data.code){
+    	                                     $.messager.show({
+    	                                         title:'提示',
+    	                                         msg:data.msg
+    	                                     });
+    	                                     $('#updateBilldatagrid').datagrid('reload');
+    	                                 } else {
+    	                                     $.messager.show({
+    	                                         title:'错误',
+    	                                         msg:data.msg
+    	                                     });
+    	                                 }
+    	                             },
+    	                             error:function(xhr,status,e){
+    	                                 hideLoading();
+    	                                 //服务器响应失败时的处理函数
+    	                                 $.messager.show({
+    	                                     title:'错误',
+    	                                     msg:'服务器请求失败.'
+    	                                 });
+    	                             }
+    	                         });
+    	                     }
+    	                 });
+    	             } else {
+    	                 $.messager.show({
+    	                     title : '提示',
+    	                     msg : '请选择一条记录.'
+    	                 });
+    	             }
     	}
     	function saverow(index) {
     		var row=$('#updateBilldatagrid').datagrid("getSelected");
