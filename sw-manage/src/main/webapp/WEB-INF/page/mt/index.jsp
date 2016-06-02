@@ -38,10 +38,9 @@
     </section>
     <section class="otherchoice-content clearfix">
         <ul>
-            <li><a href="#"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_1.png" alt=""></a></li>
+            <li style="margin-left: 15%"><a href="#"><img src="<%=rootUrl %>/resources/images/mt/otherchoice_1.png" alt=""></a></li>
             <li><a href="${rootUrl}/apple/about"><img src="${rootImgUrl}otherchoice_2.png" alt=""></a></li>
-            <li><a href="${rootUrl}/apple/guarantee"><img src="${rootImgUrl}otherchoice_3.png" alt=""></a></li>
-            <li><a href="https://shop58866385.taobao.com/"><img src="${rootImgUrl}otherchoice_4.png" alt=""></a></li>
+            <li><a href="http://computerfix.cn/Message/INDEX.ASP"><img src="<%=rootUrl %>/resources/images/mt/evaluate.png" alt=""></a></li>
         </ul>
     </section>
     <%@include file="../inc/mtFooter.jsp" %>

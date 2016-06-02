@@ -32,7 +32,7 @@ import com.swtec.sw.utils.MyStringUtil;
 import com.swtec.sw.utils.RespResult;
 import com.swtec.sw.utils.enums.RespCode;
 /**
- * 单据控制器（包括入库、出库、销售出库等）
+ * 单据控制器（包括入库）
  * @author chengkang
  *
  */

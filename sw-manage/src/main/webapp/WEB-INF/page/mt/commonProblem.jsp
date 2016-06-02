@@ -23,7 +23,7 @@
     <main class="wrap">
         <section class="content-type">
            <div class="about-title">常见问题</div><div class="about-content"><p><strong>维修后出现问题怎么办？</strong></p>
-<p>易族速修（E-ZONE）从维修完成之日起，对维修过的设备提供维修故障点非人为损坏情况下，6个月的免费保修服务。</p>
+<p>易族速修（E-ZONE）从维修完成之日起，对维修过的设备提供维修故障点非人为损坏情况下，3个月的免费保修服务(屏幕不保修)。</p>
 <p><strong><br>哪些设备可以维修？</strong></p>
 <p>易族速修致力于苹果产品的专业级维修服务，包括iPhone、iPad、MacBook、iMac等。</p>
 <p><strong><br>维修来回邮费谁承担？</strong></p>
