@@ -80,7 +80,11 @@ public enum RespCode {
     COMMODITY_NOTNULL_ERROR("503", "请录入商品."),
     
     /** 商品单号不能为空. */
-    COMMODITY_REPEAT_ERROR("504", "录入的商品重复.");
+    COMMODITY_REPEAT_ERROR("504", "录入的商品重复."),
+    
+    SERVER_CONNECTION_TIMED_OUT_ERROR("505", "服务器请求超时."),
+    
+    HTTP_REQUEST_ERROR("506", "HTTP请求错误.");
 
     /** 响应Code. */
     private String code;

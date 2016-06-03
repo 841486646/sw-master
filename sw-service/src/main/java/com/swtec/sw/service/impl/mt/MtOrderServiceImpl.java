@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.swtec.sw.persist.mapper.MtMachineBugMapperExt;
 import com.swtec.sw.persist.mapper.MtOrderMapperExt;
 import com.swtec.sw.persist.model.MtMachineBug;
@@ -17,6 +18,7 @@ import com.swtec.sw.persist.model.ext.MtOrderExt;
 import com.swtec.sw.service.impl.BaseServiceImpl;
 import com.swtec.sw.service.mt.MtOrderService;
 import com.swtec.sw.utils.DateUtil;
+import com.swtec.sw.utils.HttpRequest;
 import com.swtec.sw.utils.MyStringUtil;
 import com.swtec.sw.utils.enums.RespCode;
 import com.swtec.sw.utils.exception.BizException;
@@ -54,6 +56,12 @@ public class MtOrderServiceImpl extends BaseServiceImpl implements MtOrderServic
 		int effectLine = 0;
 		try {
 			effectLine = mtOrderMapperExt.insertSelective(mtOrder);
+			//发送短信
+			if(effectLine==1){
+				String count="mobile="+HttpRequest.mobile+"&content="+DateUtil.dt2Str(mtOrder.getCreateTime(), DateUtil.DT_FMT_5)+"手机"+mtOrder.getMobile()+HttpRequest.content+mtOrder.getBugDetail()+HttpRequest.autograph+"&appkey="+HttpRequest.appkey;
+				JSONObject obj=HttpRequest.sendPost(HttpRequest.short_message,count);
+				System.out.println("短信============！"+obj);
+			}
 		} catch (Exception e) {
 			throw new DbException(RespCode.DB_ERROR, e);
 		}
