@@ -98,6 +98,10 @@ define(function(require, exports, module) {
         fillFormBtn.on('tap', function() {
             var bSwith = false;
             fillFormInputs.each(function() {
+            	if($("#content").val()==""){
+            		$("#content").parent('li').addClass('err');
+            		bSwith = true;
+            	}
                 if ($(this).val() == '' && $(this).prop('id') != "code" 
                 	&& $(this).prop('id') != "address" && $(this).prop('id') != "name") {
                     $(this).parent('li').addClass('err');

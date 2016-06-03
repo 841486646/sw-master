@@ -392,6 +392,9 @@ p.fault-Intro {
 .fill-form li.err input::-webkit-input-placeholder{
     color: #e70000;
 }
+.fill-form li.err textarea::-webkit-input-placeholder{
+    color: #e70000;
+}
 .fill-form ul input, .fill-form select{
     display: block;
     width: 100%;
