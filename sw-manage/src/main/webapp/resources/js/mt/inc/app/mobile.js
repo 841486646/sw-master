@@ -252,7 +252,7 @@ define(function(require, exports, module) {
         var AreaId = $("#AreaId");
         var isDoor = $('input[name="isDoor"]:checked').val();
         var doorDate = $("#DoorDate");
-
+        
         if (phone.val() != "") {
             var rephone = /^[1][3578]\d{9}$/;
             if (!rephone.test(phone.val())) {
@@ -260,6 +260,7 @@ define(function(require, exports, module) {
                 return false;
             }
         }
+
 
         if (code.val() != "") {
             if (!re.test(code.val())) {
