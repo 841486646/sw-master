@@ -16,9 +16,8 @@ import com.swtec.sw.utils.exception.BizException;
 
 public class HttpRequest {
 	
-	 public static final String mobile="13357705236";
 	 
-	 public static final String mobile1="13810301668";
+	 public static final String mobile="13810301668";
 	 
 	 public static final String content="用户提交了订单，描述故障为：";
 	 

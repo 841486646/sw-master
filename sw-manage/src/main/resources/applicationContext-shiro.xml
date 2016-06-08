@@ -61,6 +61,7 @@
             <value>
                 /resources/** = anon
                 /apple/** = anon
+                /reply/** = anon
                 /logout = logout
                 /login = authc
                 /** = sysUser,user,perms,roles

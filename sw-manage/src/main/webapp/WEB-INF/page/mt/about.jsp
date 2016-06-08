@@ -34,7 +34,7 @@
         <div class="about-content2">
             <ul class="clearfix">
                 <li>
-                    <a href="tel:4006810208">
+                    <a href="tel:13810301668">
                         <img src="${rootImgUrl}phone.png" alt="">
                         <p>24小时<br>电话客服</p>
                     </a>

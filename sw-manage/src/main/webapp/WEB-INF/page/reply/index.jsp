@@ -16,7 +16,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <%@include file="../inc/mtHead.jsp" %>
-    <title>维修官网-专注苹果产品维修，手机上门维修</title>
+    <title>维修官网-数据维修中心</title>
 </head>
 <body style="display: block;">
         <%@include file="../inc/mtNav.jsp" %>
@@ -29,7 +29,7 @@
     	</section>
         <section class="choice-content clearfix">
         <ul>
-        	<c:forEach items="${products }" var="product">
+        	<c:forEach items="${products}" var="product">
                 <li>
 	                <a href="${rootUrl}/apple/machineType?productId=${product.id}"><img src="${rootUploadImgUrl}${product.imgUrl}"></a>
 	            </li>
@@ -49,14 +49,6 @@
         scale.calcScale();
         handler.focusHanlde();
     });
-    //百度统计代码
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?246050062360af5643078424c2de173a";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
     </script>
 </body>
 </html>

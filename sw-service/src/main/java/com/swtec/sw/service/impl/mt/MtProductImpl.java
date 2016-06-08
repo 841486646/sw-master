@@ -29,7 +29,10 @@ public class MtProductImpl extends BaseServiceImpl implements MtProductService {
 		if(MyStringUtil.isNotBlank(mtProduct.getName())){
 			cri.andNameEqualTo(mtProduct.getName());
 		}
-		
+		//查询类型
+		if(mtProduct.getType()!=null){
+			cri.andTypeEqualTo(mtProduct.getType());
+		}
 		selParam.setPageSize(mtProduct.getRows());
 		selParam.setPageBegin(getBegin(mtProduct.getPage(), mtProduct.getRows()));
 		List<MtProduct> mtProducts = null;

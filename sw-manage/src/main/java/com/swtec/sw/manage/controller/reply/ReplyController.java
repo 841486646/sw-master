@@ -1,4 +1,4 @@
-package com.swtec.sw.manage.controller.mt;
+package com.swtec.sw.manage.controller.reply;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.swtec.sw.manage.controller.BaseController;
 import com.swtec.sw.persist.model.MtMachineColor;
 import com.swtec.sw.persist.model.MtOrder;
+import com.swtec.sw.persist.model.MtProduct;
 import com.swtec.sw.persist.model.ext.MtProductExt;
 import com.swtec.sw.service.mt.MtMachineBugService;
 import com.swtec.sw.service.mt.MtMachineColorService;
@@ -33,13 +34,13 @@ import com.swtec.sw.utils.enums.RespCode;
 import com.swtec.sw.utils.exception.BizException;
 
 /**
- * 维修页面控制类
+ * 数据回复页面控制类
  * 
  * @author shaowei
  */
 @Controller
-@RequestMapping("/apple")
-public class MaintainController extends BaseController {
+@RequestMapping("/reply")
+public class ReplyController extends BaseController {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	@Resource
 	private MtProductService mtProdectService;
@@ -58,10 +59,10 @@ public class MaintainController extends BaseController {
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap model) {
 		MtProductExt m=new MtProductExt();
-		m.setType(0);
+		m.setType(1);
 		m.setRows(10);
 		model.addAttribute("products", mtProdectService.list(m));
-		return "mt/index";
+		return "reply/index";
 	}
 
 	/**

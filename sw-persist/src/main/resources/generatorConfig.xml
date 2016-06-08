@@ -37,7 +37,7 @@
         </javaClientGenerator>
         
         <!-- 规则信息表 -->
-        <table schema="" tableName="sw_bill" domainObjectName="Bill">
+        <table schema="" tableName="sw_mt_product" domainObjectName="MtProduct">
             <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
         </table>
     </context>
