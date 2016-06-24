@@ -16,6 +16,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <%@include file="../inc/mtHead.jsp" %>
+    <script type="text/javascript" src="<%=rootUrl %>/resources/js/model.js"></script>
     <title>填写个人信息</title>
 </head>
 <body style="display: block;">

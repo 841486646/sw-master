@@ -8,7 +8,7 @@
     <div id="toolbarTblBill">
         <div>
         	<shiro:hasPermission name="warehouse:bill:saveBill">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog();">商品入库</a>
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog();">添加订单</a>
             </shiro:hasPermission>
             <shiro:hasPermission name="warehouse:bill:updateBill">
 	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="showUpdateDialog();">修改入库</a>
@@ -25,28 +25,28 @@
     <script type="text/javascript">
         $(function(){
             $("#tblBill").datagrid({
-                url:"<%=rootUrl%>/bill/commodityStorageList.grid?state="+'sh_in',
+                url:"<%=rootUrl%>/saleBill/commodityStorageList.grid",
                 columns:[[
-                    {field:'orderNumber',title:'入库单号',width:50},
+                    {field:'orderNumber',title:'销售单号',width:50},
                     {field:'totalPrice',title:'总价格',width:50},
                     {
                     	field:'createUserId',title:'经手人',width:80,
                     	formatter:function(value,data,index){
                     		<c:forEach items="${usersList}" var="lists">
-	                            if('${lists.id}'==value){
-	                                return '${lists.nickName}';
-	                            }
-	                       </c:forEach>
+                            if('${lists.id}'==value){
+                                return '${lists.nickName}';
+                            }
+                       </c:forEach>
                         }
                     },
                     {
                         field:'type',
-                        title:'入库类型',
+                        title:'销售类型',
                         width:50,
                         formatter:function(value,data,index){
-                            <c:forEach items="${billRKTypes }" var="billRKType">
-	                            if("${billRKType}"==value){
-	                                return "${billRKType.info}";
+                            <c:forEach items="${saleTypes }" var="saleType">
+	                            if("${saleType}"==value){
+	                                return "${saleType.info}";
 	                            }
                         	</c:forEach>
                         }
@@ -60,7 +60,7 @@
                         }
                     },{
                         field:'_operate',
-                        title:'入库(请慎重操作)',
+                        title:'结算(请慎重操作)',
                         width:50,
                         formatter:function(value,data,index){
                             return "<img onclick='rk_storage()' src='<%=rootUrl %>/resources/js/easyui/themes/icons/exclamation.png' title='结算单据，同时更新库存数量' style='cursor:pointer'/>";
@@ -174,19 +174,16 @@
                 });
             }
         }
-        //增加订单
+        //增加销售单
         function showAddDialog(){
            $('#insertBillDialog').dialog({
                 title: '新增入库单',
-                width: 950,
+                width: 1000,
                 height: 550,
                 closed: false,
                 cache: false,
-                href: '<%=rootUrl%>/bill/toInsertBill',
-                modal: true,
-                onClose: function () {  
-                	$(this).dialog('destroy');//销毁  
-                }
+                href: '<%=rootUrl%>/saleBill/toInsertSaleBill',
+                modal: true
             });
         }
         

@@ -3,19 +3,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%@include file="../inc/head.jsp"%>
-    <title>机型管理</title>
+    <title>机型/故障类型管理</title>
 
     <!-- 工具栏 -->
     <div id="toolbarTblMachineType">
         <div>
         	<shiro:hasPermission name="mt:machinetype:create">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog();">新增机型</a>
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog();">新增机型/故障类型</a>
             </shiro:hasPermission>
             <shiro:hasPermission name="mt:machinetype:update">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="showUpdateUIDialog();">修改机型</a>
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="showUpdateUIDialog();">修改机型/故障类型</a>
             </shiro:hasPermission>
             <shiro:hasPermission name="mt:machinetype:delete">
-            	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteMachineType();">删除机型</a>
+            	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteMachineType();">删除机型/故障类型</a>
             </shiro:hasPermission>
         </div>
     </div>
@@ -23,10 +23,10 @@
     <table id="tblMachineType" style="width: 98%;" class="easyui-datagrid"></table>
     
     <!-- 新增窗口 -->
-    <div id="dialogAddMachineType" class="easyui-dialog" style="width: 500px; height: 380px; padding: 10px 20px;" data-options="modal:true,closed:true,top:50,buttons:'#toolbarDialogAddMachineType'">
+    <div id="dialogAddMachineType" class="easyui-dialog" style="width: 900px; height: 600px; padding: 10px 20px;" data-options="modal:true,closed:true,top:50,buttons:'#toolbarDialogAddMachineType'">
         <form id="formAddMachineType" method="post">
             <div class="fitem">
-                <label>机型名称：</label>
+                <label>机型/故障类型名称：</label>
                 <input name="name" class="easyui-validatebox" data-options="required:true,validType:['between[1,50]']" />
             </div>
             <div class="fitem">
@@ -38,14 +38,16 @@
                 </select>
             </div>
             <div class="fitem">
-                <label>机型描述：</label>
-                <input name="description" class="easyui-validatebox"/>
-            </div>
-            <div class="fitem">
                 <label>图片320*320：</label>
                 <a href="#" class="easyui-linkbutton" onclick="upload();">上  传</a>
                 <input type="hidden" name="imgUrl" id="imgUrlAdd"/>
                 <input type="file" id="imgFile" name="imgFile" style="width:200px"/>
+            </div>
+            <div class="fitem">
+                <label>机型/故障类型描述：</label>
+                <textarea class="ckeditor"  id="descriptionCount"  cols="80">
+               </textarea>
+               <input name="description" id="descriptionInput" type="hidden">
             </div>
         </form>
     </div>
@@ -56,19 +58,21 @@
     <!-- 新增窗口 -->
     
     <!-- 修改机型基本信息 -->
-    <div id="dlgMachineTypeBaseInfo" class="easyui-dialog" style="width: 500px; height: 350px; padding: 10px 20px;" data-options="modal:true,closed:true,top:50,buttons:'#tbMachineTypeBaseInfo'">
+    <div id="dlgMachineTypeBaseInfo" class="easyui-dialog" style="width: 900px; height: 600px; padding: 10px 20px;" data-options="modal:true,closed:true,top:50,buttons:'#tbMachineTypeBaseInfo'">
         <form id="formMachineTypeBaseInfo" method="post">
         	<div class="fitem">
-                <label>机型ID：</label>
+                <label>机型/故障类型ID：</label>
                 <input name="id" class="easyui-validatebox" readonly="readonly" data-options="required:true"/>
             </div>
             <div class="fitem">
-                <label>机型名称：</label>
+                <label>机型/故障类型名称：</label>
                 <input name="name" class="easyui-validatebox" data-options="required:true,validType:['between[1,50]']" />
             </div>
             <div class="fitem">
-                <label>机型描述：</label>
-                <input name="description" class="easyui-validatebox"/>
+                <label>机型/故障类型描述：</label>
+                <input class="easyui-validatebox" type="hidden" name="description" id="descriptionUpdate"/>
+                <textarea class="ckeditor"  id="descriptionCountUpdate"  cols="80"  >
+               </textarea>
             </div>
         </form>
     </div>
@@ -77,11 +81,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:$('#dlgMachineTypeBaseInfo').dialog('close');" style="width: 90px">取消</a>
     </div>
     <!-- 修改机型基本信息 -->
-    
-    <div id="tbMachineTypeResouce">
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="updateMachineTypeResouce();" style="width: 90px">保存</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:$('#dlgMachineTypeResouce').dialog('close');" style="width: 90px">取消</a>
-    </div>
+
 
     <script type="text/javascript">
         $(function(){
@@ -89,9 +89,8 @@
                 url:"${rootUrl}/mtMachineType/list.grid",
                 columns:[[
                     {field:'id',title:'ID',width:50},
-                    {field:'name',title:'机型名称',width:50},
+                    {field:'name',title:'机型/故障类型名称',width:50},
                     {field:'imgUrl',title:'图片路径',width:80},
-                    {field:'description',title:'机型描述',width:80},
                     {
                         field:'productId',
                         title:'产品',
@@ -138,6 +137,15 @@
         }
         //保存新机型
         function saveMachineType() {
+        	var contaceContent = CKEDITOR.instances.descriptionCount.getData();
+        	$("#descriptionInput").val(contaceContent);
+        	if(contaceContent==""){
+        		$.messager.show({
+                    title:'错误',
+                    msg:"请填写机型描述"
+                });
+        		return false;
+        	}
             enableValidateWhenSubmit('formAddMachineType');
             if($('#formAddMachineType').form('validate')){
                 $.ajax({
@@ -179,6 +187,7 @@
         //弹出修改机型基本信息窗口
         function showUpdateUIDialog() {
             var row=$('#tblMachineType').datagrid("getSelected");
+            CKEDITOR.instances.descriptionCountUpdate.setData(row.description);
             if(row){
                 $('#dlgMachineTypeBaseInfo').dialog('open').dialog('setTitle','修改机型基本信息');
                 $('#formMachineTypeBaseInfo').form('clear');
@@ -193,6 +202,15 @@
         }
         //保存修改后的机型的基本信息
         function updateMachineTypeInfo(){
+        	var contaceContents = CKEDITOR.instances.descriptionCountUpdate.getData();
+        	$("#descriptionUpdate").val(contaceContents);
+        	if(contaceContents==""){
+        		$.messager.show({
+                    title:'错误',
+                    msg:"请填写机型描述"
+                });
+        		return false;
+        	}
             enableValidateWhenSubmit('formMachineTypeBaseInfo');
             if ($('#formMachineTypeBaseInfo').form('validate')) {
                 $.ajax({

@@ -19,6 +19,7 @@
     <%@include file="../inc/mtHead.jsp" %>
     <title>哈喽Media</title>
     <script src="${rootUrl}/resources/js/mt/inc/video.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=rootUrl %>/resources/js/model.js"></script>
 </head>
 <body>
     <%@include file="../inc/mtNav.jsp" %>

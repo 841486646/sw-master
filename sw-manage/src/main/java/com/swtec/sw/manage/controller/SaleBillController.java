@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swtec.sw.persist.enums.BillRKType;
 import com.swtec.sw.persist.enums.CompanyType;
+import com.swtec.sw.persist.enums.SaleType;
 import com.swtec.sw.persist.model.Bill;
 import com.swtec.sw.persist.model.User;
 import com.swtec.sw.persist.model.ext.BillExt;
@@ -27,7 +28,7 @@ import com.swtec.sw.utils.MyStringUtil;
 import com.swtec.sw.utils.RespResult;
 import com.swtec.sw.utils.enums.RespCode;
 /**
- * 销售单号管理
+ * 销售管理
  * @author Administrator
  *
  */
@@ -47,14 +48,29 @@ public class SaleBillController {
 	@javax.annotation.Resource
 	private CommodityService commodityService;
 	
+	
 	/**
-	 * 查询入库信息
+	 * 跳转销售管理
+	 */
+	@RequiresPermissions("sale:bill:billView")
+	@RequestMapping(value = "/toSaleBillList", method = RequestMethod.GET)
+	public String toCommodityStorage(HttpServletRequest request, ModelMap model) {
+		model.addAttribute("saleTypes",SaleType.values());
+		//查询所有user用户信息
+		UserExt user=new UserExt();
+		List<User> usersList=userService.notPageList(user);
+		model.addAttribute("usersList", usersList);
+		return "sale/saleBillList";
+	}
+	/**
+	 * 销售查询信息
 	 */
 	@RequiresPermissions("sale:bill:billView")
 	@RequestMapping(value = "/commodityStorageList.grid", method = RequestMethod.POST)
 	@ResponseBody
 	public DataGrid CommodityStorageList(HttpServletRequest request, ModelMap model, BillExt billExt) {
-		List<Bill> bills = billService.list(billExt);
+		int billType=2;
+		List<Bill> bills = billService.list(billExt,billType);
 		return new DataGrid(billExt.getTotal(), bills);
 	}
 	/**
@@ -63,23 +79,30 @@ public class SaleBillController {
 	 * @return
 	 */
 	@RequiresPermissions("sale:bill:billView")
-	@RequestMapping(value = "/toInsertBill", method = RequestMethod.GET)
-	public String toInsertBill(ModelMap model){
+	@RequestMapping(value = "/toInsertSaleBill", method = RequestMethod.GET)
+	public String toInsertSaleBill(ModelMap model){
 		model.addAttribute("companyTypes", CompanyType.values());
 		//查询所有user用户信息
 		UserExt user=new UserExt();
 		List<User> usersList=userService.notPageList(user);
 		model.addAttribute("usersList", usersList);
-		//入库的类别
-		model.addAttribute("billRKTypes", BillRKType.values());
+		//销售的类别
+		model.addAttribute("saleTypes",SaleType.values());
 		//随机生成4位数字
 		String randomNumber=MyStringUtil.random(4);
 		//获取当前时间戳
 		String date=DateUtil.nowDateTime().replace("-","").replace(" ","").replace(":","");
 		String XSrandomNumber="XS-"+date+"-"+randomNumber;
 		model.addAttribute("XSrandomNumber", XSrandomNumber);
-		return "sale/saleBillList";
+		return "sale/insertSaleBill";
 	}
+	/**
+	 * 
+	 * @param request
+	 * @param model
+	 * @param bill
+	 * @return
+	 */
 	@RequestMapping(value = "/saveBill", method = RequestMethod.POST)
 	@ResponseBody
 	public RespResult saveBill(HttpServletRequest request, ModelMap model, Bill bill) {

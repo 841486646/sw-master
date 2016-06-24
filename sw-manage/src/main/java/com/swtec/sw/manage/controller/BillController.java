@@ -70,7 +70,8 @@ public class BillController extends BaseController{
 	@RequestMapping(value = "/commodityStorageList.grid", method = RequestMethod.POST)
 	@ResponseBody
 	public DataGrid CommodityStorageList(HttpServletRequest request, ModelMap model, BillExt billExt) {
-		List<Bill> bills = billService.list(billExt);
+		int billType=1;
+		List<Bill> bills = billService.list(billExt,billType);
 		return new DataGrid(billExt.getTotal(), bills);
 	}
 	/**
@@ -164,7 +165,7 @@ public class BillController extends BaseController{
 		//根据session获取当前修改人的id
 		User user=this.getCurrentUser(request);
 		if(user.getId() != null){
-			bill.setExamineUserId(String.valueOf(user.getId()));
+			bill.setExamineUserId(user.getId());
 		}
 		billService.update(bill);
 		//根据biiId获取商品单号里面商品信息，并且进行入库的操作
@@ -204,7 +205,8 @@ public class BillController extends BaseController{
 	@RequestMapping(value = "/commodityEarchList.grid", method = RequestMethod.POST)
 	@ResponseBody
 	public DataGrid commodityEarchList(HttpServletRequest request, ModelMap model, BillExt billExt) {
-		List<Bill> bills = billService.list(billExt);
+		int billType=1;
+		List<Bill> bills = billService.list(billExt,billType);
 		return new DataGrid(billExt.getTotal(), bills);
 	}
 	/**
@@ -241,7 +243,8 @@ public class BillController extends BaseController{
 	@RequestMapping(value = "/RKCommodityBillList.grid", method = RequestMethod.POST)
 	@ResponseBody
 	public DataGrid RKCommodityBillList(HttpServletRequest request, ModelMap model, BillExt billExt) {
-		List<Bill> bills = billService.list(billExt);
+		int billType=1;
+		List<Bill> bills = billService.list(billExt,billType);
 		return new DataGrid(billExt.getTotal(), bills);
 	}
 }

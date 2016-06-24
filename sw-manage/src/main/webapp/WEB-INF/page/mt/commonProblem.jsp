@@ -16,9 +16,10 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <%@include file="../inc/mtHead.jsp" %>
-    <title>关于我们</title>
+    <script type="text/javascript" src="<%=rootUrl %>/resources/js/model.js"></script>
+    <title>常见问题</title>
 </head>
-<body style="display: block;">
+<body style="display: block;" oncontextmenu='return false'   ondragstart='return false'   onselectstart ='return false'     onbeforecopy='return false' >
     <%@include file="../inc/mtNav.jsp" %>
     <main class="wrap">
         <section class="content-type">
@@ -47,6 +48,13 @@
             scale.calcScale();
             handler.focusHanlde();
         });
+        
+        function click() { 
+        	if (event.button==2) { 
+        	alert('对不起，本页禁用右键！') 
+        } 
+    } 
+       document.onmousedown=click 
     </script>
 </body>
 </html>

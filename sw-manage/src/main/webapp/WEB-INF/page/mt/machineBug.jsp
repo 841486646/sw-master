@@ -16,6 +16,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <%@include file="../inc/mtHead.jsp" %>
+    <script type="text/javascript" src="<%=rootUrl %>/resources/js/model.js"></script>
     <title>请选择故障</title>
 </head>
 <body style="display: block;">
@@ -24,7 +25,7 @@
     <input type="hidden" id="machineTypeId" value="${machineType.id}"/>
         <section class="content-fault">
            <div class="fault-main1"><div class="fault-img1"><img src="${rootUploadImgUrl}${machineType.imgUrl}"></div><div class="fault-txt1 clearfix"><p>${machineType.name}<span></span></p><p class="fault-Intro"></p></div></div><div class="fault-main2 fault-color">
-           <div class="fault-tit">选择颜色</div>
+           <div class="fault-tit">请选择颜色或类型尺寸</div>
            <ul>
            	<c:forEach items="${machineColors }" var="machineColor">
            	   <li value="${machineColor.id}">${machineColor.name}</li><input type="radio" name="pr_radio" id="pr_radio_${machineColor.id}" value="${machineColor.id}" style="display:none">

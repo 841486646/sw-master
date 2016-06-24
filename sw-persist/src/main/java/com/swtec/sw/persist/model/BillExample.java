@@ -739,123 +739,113 @@ public class BillExample {
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdEqualTo(String value) {
+        public Criteria andExamineUserIdEqualTo(Integer value) {
             addCriterion("examine_user_id =", value, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdNotEqualTo(String value) {
+        public Criteria andExamineUserIdNotEqualTo(Integer value) {
             addCriterion("examine_user_id <>", value, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdGreaterThan(String value) {
+        public Criteria andExamineUserIdGreaterThan(Integer value) {
             addCriterion("examine_user_id >", value, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdGreaterThanOrEqualTo(String value) {
+        public Criteria andExamineUserIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("examine_user_id >=", value, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdLessThan(String value) {
+        public Criteria andExamineUserIdLessThan(Integer value) {
             addCriterion("examine_user_id <", value, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdLessThanOrEqualTo(String value) {
+        public Criteria andExamineUserIdLessThanOrEqualTo(Integer value) {
             addCriterion("examine_user_id <=", value, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdLike(String value) {
-            addCriterion("examine_user_id like", value, "examineUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExamineUserIdNotLike(String value) {
-            addCriterion("examine_user_id not like", value, "examineUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExamineUserIdIn(List<String> values) {
+        public Criteria andExamineUserIdIn(List<Integer> values) {
             addCriterion("examine_user_id in", values, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdNotIn(List<String> values) {
+        public Criteria andExamineUserIdNotIn(List<Integer> values) {
             addCriterion("examine_user_id not in", values, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdBetween(String value1, String value2) {
+        public Criteria andExamineUserIdBetween(Integer value1, Integer value2) {
             addCriterion("examine_user_id between", value1, value2, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andExamineUserIdNotBetween(String value1, String value2) {
+        public Criteria andExamineUserIdNotBetween(Integer value1, Integer value2) {
             addCriterion("examine_user_id not between", value1, value2, "examineUserId");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdIsNull() {
-            addCriterion("bill_id is null");
+        public Criteria andCustomerTypeIsNull() {
+            addCriterion("customer_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdIsNotNull() {
-            addCriterion("bill_id is not null");
+        public Criteria andCustomerTypeIsNotNull() {
+            addCriterion("customer_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdEqualTo(Integer value) {
-            addCriterion("bill_id =", value, "billId");
+        public Criteria andCustomerTypeEqualTo(Integer value) {
+            addCriterion("customer_type =", value, "customerType");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdNotEqualTo(Integer value) {
-            addCriterion("bill_id <>", value, "billId");
+        public Criteria andCustomerTypeNotEqualTo(Integer value) {
+            addCriterion("customer_type <>", value, "customerType");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdGreaterThan(Integer value) {
-            addCriterion("bill_id >", value, "billId");
+        public Criteria andCustomerTypeGreaterThan(Integer value) {
+            addCriterion("customer_type >", value, "customerType");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("bill_id >=", value, "billId");
+        public Criteria andCustomerTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("customer_type >=", value, "customerType");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdLessThan(Integer value) {
-            addCriterion("bill_id <", value, "billId");
+        public Criteria andCustomerTypeLessThan(Integer value) {
+            addCriterion("customer_type <", value, "customerType");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdLessThanOrEqualTo(Integer value) {
-            addCriterion("bill_id <=", value, "billId");
+        public Criteria andCustomerTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("customer_type <=", value, "customerType");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdIn(List<Integer> values) {
-            addCriterion("bill_id in", values, "billId");
+        public Criteria andCustomerTypeIn(List<Integer> values) {
+            addCriterion("customer_type in", values, "customerType");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdNotIn(List<Integer> values) {
-            addCriterion("bill_id not in", values, "billId");
+        public Criteria andCustomerTypeNotIn(List<Integer> values) {
+            addCriterion("customer_type not in", values, "customerType");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdBetween(Integer value1, Integer value2) {
-            addCriterion("bill_id between", value1, value2, "billId");
+        public Criteria andCustomerTypeBetween(Integer value1, Integer value2) {
+            addCriterion("customer_type between", value1, value2, "customerType");
             return (Criteria) this;
         }
 
-        public Criteria andBillIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("bill_id not between", value1, value2, "billId");
+        public Criteria andCustomerTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("customer_type not between", value1, value2, "customerType");
             return (Criteria) this;
         }
 

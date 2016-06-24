@@ -1,5 +1,6 @@
 package com.swtec.sw.persist.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -561,53 +562,123 @@ public class CommodityBillExample {
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceEqualTo(Long value) {
+        public Criteria andUnitPriceEqualTo(BigDecimal value) {
             addCriterion("unit_price =", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceNotEqualTo(Long value) {
+        public Criteria andUnitPriceNotEqualTo(BigDecimal value) {
             addCriterion("unit_price <>", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceGreaterThan(Long value) {
+        public Criteria andUnitPriceGreaterThan(BigDecimal value) {
             addCriterion("unit_price >", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andUnitPriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("unit_price >=", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceLessThan(Long value) {
+        public Criteria andUnitPriceLessThan(BigDecimal value) {
             addCriterion("unit_price <", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceLessThanOrEqualTo(Long value) {
+        public Criteria andUnitPriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("unit_price <=", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceIn(List<Long> values) {
+        public Criteria andUnitPriceIn(List<BigDecimal> values) {
             addCriterion("unit_price in", values, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceNotIn(List<Long> values) {
+        public Criteria andUnitPriceNotIn(List<BigDecimal> values) {
             addCriterion("unit_price not in", values, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceBetween(Long value1, Long value2) {
+        public Criteria andUnitPriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("unit_price between", value1, value2, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceNotBetween(Long value1, Long value2) {
+        public Criteria andUnitPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("unit_price not between", value1, value2, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeIsNull() {
+            addCriterion("bill_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeIsNotNull() {
+            addCriterion("bill_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeEqualTo(String value) {
+            addCriterion("bill_type =", value, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeNotEqualTo(String value) {
+            addCriterion("bill_type <>", value, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeGreaterThan(String value) {
+            addCriterion("bill_type >", value, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("bill_type >=", value, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeLessThan(String value) {
+            addCriterion("bill_type <", value, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeLessThanOrEqualTo(String value) {
+            addCriterion("bill_type <=", value, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeLike(String value) {
+            addCriterion("bill_type like", value, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeNotLike(String value) {
+            addCriterion("bill_type not like", value, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeIn(List<String> values) {
+            addCriterion("bill_type in", values, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeNotIn(List<String> values) {
+            addCriterion("bill_type not in", values, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeBetween(String value1, String value2) {
+            addCriterion("bill_type between", value1, value2, "billType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillTypeNotBetween(String value1, String value2) {
+            addCriterion("bill_type not between", value1, value2, "billType");
             return (Criteria) this;
         }
     }

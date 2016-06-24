@@ -20,6 +20,7 @@
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/easyui/easyui-lang-zh_CN.js"></script>
+     <script type="text/javascript" src="<%=rootUrl %>/resources/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/easyui-validate.js"></script>
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/mytool.js"></script>
     <script type="text/javascript" src="<%=rootUrl %>/resources/js/ajaxfileupload.js?t=2015"></script>

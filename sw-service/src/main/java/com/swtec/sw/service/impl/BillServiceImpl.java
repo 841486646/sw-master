@@ -45,12 +45,20 @@ public class BillServiceImpl extends BaseServiceImpl implements BillService{
 	private CommodityMapperExt commodityMapperExt;
 	
 	@Override
-	public List<Bill> list(BillExt billExt) {
+	public List<Bill> list(BillExt billExt,int billType) {
 		BillExample selParam=new BillExample();
 		BillExample.Criteria cri=selParam.createCriteria();
 		//根据单号状态查询
 		if(!MyStringUtil.isEmpty(billExt.getState()) ){
 			cri.andStateEqualTo(billExt.getState());
+		}
+		if(billType!=0){
+			if(billType==1){
+				cri.andTypeLike("%"+"RK_"+"%");
+			}
+			if(billType==2){
+				cri.andTypeLike("%"+"XS_"+"%");
+			}
 		}
 		selParam.setPageSize(billExt.getRows());
 		selParam.setPageBegin(getBegin(billExt.getPage(), billExt.getRows()));
@@ -109,6 +117,8 @@ public class BillServiceImpl extends BaseServiceImpl implements BillService{
 			        	commodityBill.setUnitPrice(object.getBigDecimal("unitPrice"));
 			        	//单号id
 			        	commodityBill.setBillId(bill.getId());
+			        	//单号类型
+			        	commodityBill.setBillType(bill.getType());
 			        	commodityBillMapperExt.insertSelective(commodityBill);
 					}
 				}

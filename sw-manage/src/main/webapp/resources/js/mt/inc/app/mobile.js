@@ -224,7 +224,7 @@ define(function(require, exports, module) {
 
         if (pr_id == undefined) {
 
-            swal({title: "", text: pc_id == 3 || pc_id == 4 ? '<span style="font-size:18px">请填选择尺寸</span>' : '<span style="font-size:18px">请填选择颜色！</span>', html: true });
+            swal({title: "", text: pc_id == 3 || pc_id == 4 ? '<span style="font-size:18px">请填选择尺寸</span>' : '<span style="font-size:18px">请选择颜色或类型尺寸！</span>', html: true });
             return false;
         }
         if (pf_id == "") {

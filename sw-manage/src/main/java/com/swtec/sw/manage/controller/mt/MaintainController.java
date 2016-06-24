@@ -57,6 +57,7 @@ public class MaintainController extends BaseController {
 	 */
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap model) {
+		model.addAttribute("bannerType",0);
 		MtProductExt m=new MtProductExt();
 		m.setType(0);
 		m.setRows(10);
@@ -68,7 +69,8 @@ public class MaintainController extends BaseController {
 	 * 维修站机型选择页面
 	 */
 	@RequestMapping(value = "/machineType", method = RequestMethod.GET)
-	public String machineType(HttpServletRequest request, ModelMap model, Integer productId) {
+	public String machineType(HttpServletRequest request, ModelMap model, Integer productId,String type) {
+		model.addAttribute("type", type);
 		model.addAttribute("machineTypes", mtMachineTypeService.listByProductId(productId));
 		return "mt/machineType";
 	}
@@ -168,6 +170,15 @@ public class MaintainController extends BaseController {
 	@ResponseBody
 	public RespResult findOrder(HttpServletRequest request, ModelMap model) {
 		return RespResult.getInstance(RespCode.SUCCESS, "未查询到订单信息");
+	}
+	
+	/**
+	 * 关于我们页面
+	 */
+	@RequestMapping(value = "/aboutUs")
+	public String aboutUs(HttpServletRequest request, ModelMap model,String type) {
+		model.addAttribute("type", type);
+		return "mt/aboutUs";
 	}
 	
 	/**

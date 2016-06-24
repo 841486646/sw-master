@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.swtec.sw.persist.mapper.CommodityBillMapperExt" >
-	<resultMap id="findCommodityAndBillMap" type="com.swtec.sw.persist.model.ext.CommodityBillExt" >
-	    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
-	    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
-	    <result column="company_type" property="companyType" jdbcType="VARCHAR" />
-	    <result column="company_type" property="companyType" jdbcType="VARCHAR" />
-	    <result column="commodity_number" property="commodityNumber" jdbcType="INTEGER" />
-   	    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
-   	    <result column="id" property="id" jdbcType="INTEGER" />
-   	    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
-   	    <result column="bill_id" property="billId" jdbcType="INTEGER" />
+<mapper namespace="com.swtec.sw.persist.mapper.CommodityBillMapperExt">
+	<resultMap id="findCommodityAndBillMap" type="com.swtec.sw.persist.model.ext.CommodityBillExt">
+	    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+	    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+	    <result column="company_type" jdbcType="VARCHAR" property="companyType" />
+	    <result column="company_type" jdbcType="VARCHAR" property="companyType" />
+	    <result column="commodity_number" jdbcType="INTEGER" property="commodityNumber" />
+   	    <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+   	    <result column="id" jdbcType="INTEGER" property="id" />
+   	    <result column="commodity_id" jdbcType="INTEGER" property="commodityId" />
+   	    <result column="bill_id" jdbcType="INTEGER" property="billId" />
 	  </resultMap>
 	  <!-- 入库单号里面商品查询 -->
-	  <select id="selectCommodityBillList" resultMap="findCommodityAndBillMap" parameterType="com.swtec.sw.persist.model.CommodityBillExample" >
+	  <select id="selectCommodityBillList" parameterType="com.swtec.sw.persist.model.CommodityBillExample" resultMap="findCommodityAndBillMap">
 	   <include refid="Pageable_Prefix" />
 	  	select  cc.category_name,
 	  			c.commodity_name,
@@ -26,16 +26,16 @@
 	  			from sw_commodity_bill cb
 				LEFT JOIN sw_commodity c ON cb.commodity_id=c.id
 				LEFT JOIN sw_commodity_category cc ON cc.id=c.commodity_category_id
-		    <if test="_parameter != null" >
+		    <if test="_parameter != null">
       			<include refid="Example_Where_Clause" />
     		</if>
-    		<if test="orderByClause != null" >
+    		<if test="orderByClause != null">
       			order by ${orderByClause}
     		</if>
 		<include refid="Pageable_Suffix" />
 	  </select>
 	  <!-- 判断是否重复 -->
 	  <select id="selectWhetherToRepeat" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-	  	select count(*)  from sw_commodity_bill WHERE bill_id=#{billId} group by commodity_id having count(*)>1;
+	  	select count(*)  from sw_commodity_bill WHERE bill_id=#{billId} group by commodity_id having count(*)&gt;1;
 	  </select>
 </mapper>

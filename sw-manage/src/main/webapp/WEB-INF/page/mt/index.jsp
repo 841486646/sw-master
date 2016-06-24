@@ -16,22 +16,23 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <%@include file="../inc/mtHead.jsp" %>
+    <script type="text/javascript" src="<%=rootUrl %>/resources/js/model.js"></script>
     <title>维修官网-专注苹果产品维修，手机上门维修</title>
 </head>
-<body style="display: block;">
+<body style="display: block;" oncontextmenu='return false'   ondragstart='return false'   onselectstart ='return false'   onbeforecopy='return false'  >
         <%@include file="../inc/mtNav.jsp" %>
-        <section class="focus-content">
-	        <ul>
+        <section class="focus-content" >
+	        <ul style="margin: 0;">
 	            <li><a href="#"><img src="${rootImgUrl}banner1.jpg" alt=""></a></li>
 	            <li><a href="#"><img src="${rootImgUrl}banner2.jpg?t=2016" alt=""></a></li>
 	        </ul>
 	        <ol></ol>
     	</section>
-        <section class="choice-content clearfix">
-        <ul>
+        <section class="choice-content clearfix" sty>
+        <ul style="margin: 0;">
         	<c:forEach items="${products }" var="product">
                 <li>
-	                <a href="${rootUrl}/apple/machineType?productId=${product.id}"><img src="${rootUploadImgUrl}${product.imgUrl}"></a>
+	                <a href="${rootUrl}/apple/machineType?productId=${product.id}&type=apple"><img src="${rootUploadImgUrl}${product.imgUrl}"></a>
 	            </li>
            	</c:forEach>
         </ul>
@@ -57,6 +58,13 @@
 	  var s = document.getElementsByTagName("script")[0]; 
 	  s.parentNode.insertBefore(hm, s);
 	})();
+	
+    function click() { 
+    	if (event.button==2) { 
+    	alert('对不起，本页禁用右键！') 
+    } 
+} 
+   document.onmousedown=click 
     </script>
 </body>
 </html>

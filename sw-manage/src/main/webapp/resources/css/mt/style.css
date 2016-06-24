@@ -9,7 +9,6 @@ body {
     /*-webkit-appearance:none;*/;
 }
 a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, cite, code, datalist, dd, del, details, dfn, dl, div, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, i, iframe, img, ins, kbd, keygen, label, legend, li, meter, nav, menu, object, ol, output, p, pre, progress, q, s, samp, section, small, span, source, strong, sub, sup, table, tbody, tfoot, thead, th, tr, td, video, u, ul, var, input, select {
-    margin: 0;
     padding: 0;
 }
 body, button, input, select, textarea {

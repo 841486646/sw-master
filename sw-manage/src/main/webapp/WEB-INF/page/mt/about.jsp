@@ -15,6 +15,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <%@include file="../inc/mtHead.jsp" %>
+    <script type="text/javascript" src="<%=rootUrl %>/resources/js/model.js"></script>
     <title>联系我们</title>
 </head>
 <body style="display: block;">
@@ -23,7 +24,7 @@
         <div class="about-content1">
             <ul>
                 <li>详细地址：</li>
-                <li>华普国际大厦15层1509B室</li>
+                <li>北京朝阳区朝外大街19号华普国际大厦15层1509B室</li>
                 <li>地铁：2/6号线朝阳门站A口出往东50米即到华普大厦（小肥羊入口进.电梯15层1509B室）。</li>
                 <li>公交：75路、101电车、109电车、110路、112电车、420路、615路、619路、750快车"朝阳门外" 站下车即到。</li>
                 <li><img src="${rootImgUrl}20141222234317903.jpg" alt=""></li>
@@ -39,7 +40,7 @@
                         <p>24小时<br>电话客服</p>
                     </a>
                 </li>
-                <li><a href="http://www.computerfix.cn/shouji/contact.asp" target="_blank">
+                <li><a href="#">
                     <img src="${rootImgUrl}110105-1208.png" alt="">
                     <p>8:00-24:00<br>在线客服</p>
                     </a>

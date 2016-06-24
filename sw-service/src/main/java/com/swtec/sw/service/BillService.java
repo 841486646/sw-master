@@ -17,7 +17,7 @@ public interface BillService extends BaseService{
 	 * @param billExt
 	 * @return
 	 */
-	List<Bill> list(BillExt billExt);
+	List<Bill> list(BillExt billExt,int billType);
 	
 	/**
 	 * 增加

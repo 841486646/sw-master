@@ -16,6 +16,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <%@include file="../inc/mtHead.jsp" %>
+    <script type="text/javascript" src="<%=rootUrl %>/resources/js/model.js"></script>
     <title>保修查询</title>
     <script src="${rootUrl}/resources/js/mt/inc/warranty.js" type="text/javascript"></script>
 </head>
