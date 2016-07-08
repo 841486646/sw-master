@@ -1,8 +1,2 @@
 //百度侨商代码    
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?cd0735cfb72299c845aac94a11d24c3f";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F072a591f9df6367c916868972e24da76' type='text/javascript'%3E%3C/script%3E"));

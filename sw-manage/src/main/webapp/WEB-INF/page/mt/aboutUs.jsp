@@ -42,7 +42,7 @@
 				<p>2，苹果 <span style="color: red;">iPhone3G iPhone 3GS</span>显示屏 触屏更换，保证原装 价格最低！</p>
 				<p>3，苹果 <span style="color: red;">ipad</span>显示屏 触屏 更换，价格最低 保证原装 质量最好！</p>
 				<p style="color:red; ">本维修中心所有显示屏均为原厂订货，质量有保证价格最低！现场更换 立等可取！</p>
-				<p>当面拆机 当面更换,30分钟换好.所有苹果屏幕原装正品,质保三个月.</p>
+				<p>当面拆机 当面更换,所有苹果屏幕原装正品</p>
 				<p><strong><span style="color: red;">免费咨询热线：</span><span style="color: rgb(0, 0, 255)">400-6810-208</span></strong></p>
 				</c:if>
 				<c:if test="${type==1}">

@@ -24,7 +24,7 @@
         <section class="focus-content">
 	        <ul style="margin: 0;">
 	            <li><a href="#"><img src="${rootImgUrl}banner4.png" alt=""></a></li>
-	            <li><a href="#"><img src="${rootImgUrl}bannner3.png" alt=""></a></li>
+	            <li><a href="#"><img src="${rootImgUrl}banner3.png" alt=""></a></li>
 	        </ul>
 	        <ol></ol>
     	</section>

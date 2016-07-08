@@ -53,7 +53,6 @@
                 lines:true,
                 url:"<%=rootUrl%>/commodityCategory/findCommodityCategoryCheckedTree",
                 onClick: function(node){ //点击商品类型节点查询事件
-                var row=$('#commodityCategoryDiv').tree("getSelected");
                 var array=$('#commodityCategoryDiv').tree('getChildren',node.target);
                 var str="";
                 for (var i = 0; i < array.length; i++) {

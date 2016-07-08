@@ -8,7 +8,10 @@
     <div id="toolbarTblBill">
         <div>
         	<shiro:hasPermission name="warehouse:bill:saveBill">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog();">添加订单</a>
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog(0);">添加销售订单</a>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="warehouse:bill:saveBill">
+	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog(1);">添加维修订单</a>
             </shiro:hasPermission>
             <shiro:hasPermission name="warehouse:bill:updateBill">
 	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="showUpdateDialog();">修改入库</a>
@@ -22,13 +25,16 @@
     <table id="tblBill" style="width: 98%;" class="easyui-datagrid"></table>
     <div id="insertBillDialog"></div>
     <div id="updateBillDialog"></div>
+    <div id="showReceivablesAddDialog"></div>
     <script type="text/javascript">
         $(function(){
             $("#tblBill").datagrid({
                 url:"<%=rootUrl%>/saleBill/commodityStorageList.grid",
                 columns:[[
                     {field:'orderNumber',title:'销售单号',width:50},
-                    {field:'totalPrice',title:'总价格',width:50},
+                    {field:'scName',title:'维修/销售单名称',width:100},
+                    {field:'totalPrice',title:'商品总价格',width:50},
+                    {field:'otherExpenses',title:'其它费用',width:50},
                     {
                     	field:'createUserId',title:'经手人',width:80,
                     	formatter:function(value,data,index){
@@ -41,7 +47,7 @@
                     },
                     {
                         field:'type',
-                        title:'销售类型',
+                        title:'类型',
                         width:50,
                         formatter:function(value,data,index){
                             <c:forEach items="${saleTypes }" var="saleType">
@@ -60,10 +66,10 @@
                         }
                     },{
                         field:'_operate',
-                        title:'结算(请慎重操作)',
+                        title:'收款(请慎重操作)',
                         width:50,
                         formatter:function(value,data,index){
-                            return "<img onclick='rk_storage()' src='<%=rootUrl %>/resources/js/easyui/themes/icons/exclamation.png' title='结算单据，同时更新库存数量' style='cursor:pointer'/>";
+                            return "<img onclick='showReceivablesAddDialog()' src='<%=rootUrl %>/resources/js/easyui/themes/icons/money_yen.png' title='结算单据，同时更新库存数量' style='cursor:pointer'/>";
                         }
                     }
                 ]],
@@ -126,63 +132,27 @@
             }
         }
         
-        //入库的操作
-        function rk_storage(){
-        	var row=$('#tblBill').datagrid("getSelected");
-            if(row){
-                $.messager.confirm('提示','您确定入库操作吗?入库将会改变商品库存数量！',function(r) {
-                    if(r){
-                        $.ajax({
-                            async:false,
-                            url:"<%=rootUrl%>/bill/updateBill",
-                            type:"POST",
-                            dataType:"json",
-                            data:{id:row.id},
-                            beforeSend:function(){
-                                showLoading();
-                            },
-                            success:function(data) {
-                                hideLoading();
-                                if(0==data.code){
-                                    $.messager.show({
-                                        title:'提示',
-                                        msg:data.msg
-                                    });
-                                    $('#tblBill').datagrid('reload');
-                                } else {
-                                    $.messager.show({
-                                        title:'错误',
-                                        msg:data.msg
-                                    });
-                                }
-                            },
-                            error:function(xhr,status,e){
-                                hideLoading();
-                                //服务器响应失败时的处理函数
-                                $.messager.show({
-                                    title:'错误',
-                                    msg:'服务器请求失败.'
-                                });
-                            }
-                        });
-                    }
-                });
-            } else {
-                $.messager.show({
-                    title : '提示',
-                    msg : '请选择一条记录.'
-                });
-            }
-        }
-        //增加销售单
-        function showAddDialog(){
-           $('#insertBillDialog').dialog({
-                title: '新增入库单',
-                width: 1000,
+        //销售、维修付款
+        function showReceivablesAddDialog(){
+           $('#showReceivablesAddDialog').dialog({
+                title: '销售、维修付款',
+                width: 950,
                 height: 550,
                 closed: false,
                 cache: false,
-                href: '<%=rootUrl%>/saleBill/toInsertSaleBill',
+                href: '<%=rootUrl%>/receivables/insertReceivables',
+                modal: true,
+            });
+        }
+        //增加销售单
+        function showAddDialog(saleType){
+           $('#insertBillDialog').dialog({
+                title: '新增入库单',
+                width: 1100,
+                height: 608,
+                closed: false,
+                cache: false,
+                href: '<%=rootUrl%>/saleBill/toInsertSaleBill?saleType='+saleType,
                 modal: true
             });
         }

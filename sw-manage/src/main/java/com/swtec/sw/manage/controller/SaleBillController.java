@@ -80,7 +80,7 @@ public class SaleBillController {
 	 */
 	@RequiresPermissions("sale:bill:billView")
 	@RequestMapping(value = "/toInsertSaleBill", method = RequestMethod.GET)
-	public String toInsertSaleBill(ModelMap model){
+	public String toInsertSaleBill(ModelMap model,Integer saleType){
 		model.addAttribute("companyTypes", CompanyType.values());
 		//查询所有user用户信息
 		UserExt user=new UserExt();
@@ -92,7 +92,13 @@ public class SaleBillController {
 		String randomNumber=MyStringUtil.random(4);
 		//获取当前时间戳
 		String date=DateUtil.nowDateTime().replace("-","").replace(" ","").replace(":","");
-		String XSrandomNumber="XS-"+date+"-"+randomNumber;
+		String XSrandomNumber="";
+		if(saleType==0){
+			 XSrandomNumber="XS-"+date+"-"+randomNumber;
+		}
+		if(saleType==1){
+			XSrandomNumber="WX-"+date+"-"+randomNumber;
+		}
 		model.addAttribute("XSrandomNumber", XSrandomNumber);
 		return "sale/insertSaleBill";
 	}

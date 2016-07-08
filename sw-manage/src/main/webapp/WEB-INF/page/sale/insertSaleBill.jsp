@@ -9,6 +9,12 @@
     	<div style="margin:0 auto; width:900px;">
     		<table>
     			<tr>
+    				<td>名称:</td>
+    				<td>
+    					<input class="easyui-textbox" data-options="required:true" name="scName"></input><span class="spanRequired">*</span>
+    				</td>
+    			</tr>
+    			<tr>
     				<td>客户类型:</td>
     				<td>
     					<select name="customerType" class="easyui-combobox"  data-options="validType:'selectValueRequired'" style="width: 160px;">
@@ -28,9 +34,9 @@
     				</td>
     			</tr>
     			<tr>
-    				<td>销售日期:</td>
+    				<td>近件日期:</td>
     				<td><input class="easyui-datebox" data-options="required:true"  id="createTimes"></input><span class="spanRequired">*</span></td>
-    				<td>销售类别:</td>
+    				<td>类别:</td>
     				<td>
     					<select name="type" class="easyui-combobox"  data-options="validType:'selectValueRequired'"  style="width: 200px;">
                 				<option value="">--请选择--</option>
@@ -52,7 +58,8 @@
     				</td>
     			</tr>
     			<tr>
-    				<td colspan="3" style="font-family:宋体;color: red;">销售单号：${XSrandomNumber}<input name="orderNumber" value="${XSrandomNumber}" type="hidden"></td>
+    				<td>单号：<input name="orderNumber" value="${XSrandomNumber}" type="hidden"></td>
+    				<td  colspan="2" style="font-family:宋体;color: red;">${XSrandomNumber}</td>
     				<td>其它费用:
     					<input class="easyui-numberbox"  name="otherExpenses" ></input>
     				</td>
