@@ -5,36 +5,46 @@
     <%@include file="../inc/head.jsp"%>
     <title>入库管理</title>
     <!-- 工具栏 -->
-    <div id="toolbarTblBill">
+    <div id="toolbarSaleTblBill">
         <div>
-        	<shiro:hasPermission name="warehouse:bill:saveBill">
+        	<shiro:hasPermission name="sale:bill:saveReceivables">
 	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog(0);">添加销售订单</a>
             </shiro:hasPermission>
-            <shiro:hasPermission name="warehouse:bill:saveBill">
+            <shiro:hasPermission name="sale:bill:saveReceivables">
 	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="showAddDialog(1);">添加维修订单</a>
             </shiro:hasPermission>
-            <shiro:hasPermission name="warehouse:bill:updateBill">
-	            <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="showUpdateDialog();">修改入库</a>
-            </shiro:hasPermission>
-            <shiro:hasPermission name="warehouse:bill:deleteBill">
-            	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteRole();">删除入库</a>
+            <shiro:hasPermission name="sale:bill:deleteReceivables">
+            	<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteRole();">删除订单</a>
             </shiro:hasPermission>
         </div>
     </div>
     <!-- 表格 -->
-    <table id="tblBill" style="width: 98%;" class="easyui-datagrid"></table>
+    <table id="tblSaleBill" style="width: 98%;" class="easyui-datagrid"></table>
     <div id="insertBillDialog"></div>
-    <div id="updateBillDialog"></div>
     <div id="showReceivablesAddDialog"></div>
+    <!-- 维修修改 -->
+    <div id="showReceivablesUpdateDialog"></div>
     <script type="text/javascript">
         $(function(){
-            $("#tblBill").datagrid({
+            $("#tblSaleBill").datagrid({
                 url:"<%=rootUrl%>/saleBill/commodityStorageList.grid",
                 columns:[[
-                    {field:'orderNumber',title:'销售单号',width:50},
+                    {field:'orderNumber',title:'销售单号',width:100},
                     {field:'scName',title:'维修/销售单名称',width:100},
-                    {field:'totalPrice',title:'商品总价格',width:50},
-                    {field:'otherExpenses',title:'其它费用',width:50},
+                    {field:'totalPrice',title:'商品总价格',width:50,precision:2},
+                    {field:'otherExpenses',title:'其它费用',width:50,precision:2},
+                    {
+                        field:'state',
+                        title:'单号状态',
+                        width:50,
+                        formatter:function(value,data,index){
+                            <c:forEach items="${billRKStates }" var="billRKState">
+	                            if("${billRKState}"==value){
+	                                return "${billRKState.info}";
+	                            }
+                        	</c:forEach>
+                        }
+                    },
                     {
                     	field:'createUserId',title:'经手人',width:80,
                     	formatter:function(value,data,index){
@@ -65,11 +75,15 @@
                             return fmtDate(value,"yyyy-MM-dd");
                         }
                     },{
-                        field:'_operate',
+                        field:'receivablesId',
                         title:'收款(请慎重操作)',
                         width:50,
                         formatter:function(value,data,index){
-                            return "<img onclick='showReceivablesAddDialog()' src='<%=rootUrl %>/resources/js/easyui/themes/icons/money_yen.png' title='结算单据，同时更新库存数量' style='cursor:pointer'/>";
+                        	if(value==null){
+                        		return "<img onclick='showReceivablesAddDialog()' src='<%=rootUrl %>/resources/js/easyui/themes/icons/exclamation.png' title='结算单据，同时更新库存数量' style='cursor:pointer'/>";
+                        	}else{
+                        		return "<img onclick='showReceivablesUpdateDialog()' src='<%=rootUrl %>/resources/js/easyui/themes/icons/money_yen.png' title='结算单据，同时更新库存数量' style='cursor:pointer'/>";
+                        	}
                         }
                     }
                 ]],
@@ -80,12 +94,17 @@
                 fit:true,
                 pagination: true,
                 striped:true,
-                toolbar:'#toolbarTblBill'
+                cache:false,
+                toolbar:'#toolbarSaleTblBill'
             });
         });
         //删除供应商
         function deleteRole(){
-            var row=$('#tblBill').datagrid("getSelected");
+            var row=$('#tblSaleBill').datagrid("getSelected");
+            if(row.receivablesId!=null){
+            	$.messager.alert("提示","此订单已有收款，禁止删除！您可以取消或者退回此订单！");
+            	return false;
+            }
             if(row){
                 $.messager.confirm('提示','确定删除该数据吗?',function(r) {
                     if(r){
@@ -105,7 +124,7 @@
                                         title:'提示',
                                         msg:data.msg
                                     });
-                                    $('#tblBill').datagrid('reload');
+                                    $('#tblSaleBill').datagrid('reload');
                                 } else {
                                     $.messager.show({
                                         title:'错误',
@@ -132,22 +151,51 @@
             }
         }
         
-        //销售、维修付款
-        function showReceivablesAddDialog(){
+        //销售、维修增加
+   function showReceivablesAddDialog(){
+       var row=$('#tblSaleBill').datagrid("getSelected");
+            if(row){
            $('#showReceivablesAddDialog').dialog({
-                title: '销售、维修付款',
-                width: 950,
-                height: 550,
+                title: '销售/维修付款增加',
+                width: 800,
+                height: 300,
                 closed: false,
                 cache: false,
-                href: '<%=rootUrl%>/receivables/insertReceivables',
+                href: '<%=rootUrl%>/receivables/toInsertReceivables?id='+row.id,
                 modal: true,
             });
+        }else{
+        	 $.messager.show({
+                 title:'提示',
+                 msg:'请选择一条记录.'
+             });
+        	}
         }
+	 //销售、维修付款修改
+   function showReceivablesUpdateDialog(id){
+       var row=$('#tblSaleBill').datagrid("getSelected");
+       if(row){
+           $('#showReceivablesUpdateDialog').dialog({
+                title: '销售/维修付款修改',
+                width: 800,
+                height: 300,
+                closed: false,
+                cache: false,
+                href: '<%=rootUrl%>/receivables/toUpdateReceivables?id='+row.receivablesId,
+                modal: true,
+            });
+        }else{
+       	 $.messager.show({
+             title:'提示',
+             msg:'请选择一条记录.'
+         });
+    	}
+    }
+        
         //增加销售单
         function showAddDialog(saleType){
            $('#insertBillDialog').dialog({
-                title: '新增入库单',
+                title: '销售/维修单增加',
                 width: 1100,
                 height: 608,
                 closed: false,
@@ -155,26 +203,5 @@
                 href: '<%=rootUrl%>/saleBill/toInsertSaleBill?saleType='+saleType,
                 modal: true
             });
-        }
-        
-        function showUpdateDialog(){
-        	var row=$('#tblBill').datagrid("getSelected");
-            if(row){
-            	$('#updateBillDialog').dialog({
-                    title: '修改入库单',
-                    width: 900,
-                    height: 600,
-                    closed: false,
-                    closable: false,
-                    cache: false,
-                    href: '<%=rootUrl%>/bill/toupdateBill?id='+row.id,
-                    modal: true
-                });
-            }else{
-                $.messager.show({
-                    title:'提示',
-                    msg:'请选择一条记录.'
-                });
-            }
         }
     </script>

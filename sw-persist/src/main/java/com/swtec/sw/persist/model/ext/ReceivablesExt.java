@@ -1,5 +1,7 @@
 package com.swtec.sw.persist.model.ext;
 
+import java.math.BigDecimal;
+
 import com.swtec.sw.persist.model.Receivables;
 /**
  * 销售维修
@@ -12,6 +14,11 @@ public class ReceivablesExt extends Receivables{
 	private int rows;
 	private int total;
 	private boolean selected;
+	private String orderNumber;
+	private BigDecimal billTotalPrice;
+	private String BillState;
+	private Integer BillId;
+	private BigDecimal otherExpenses;
 	
 	public boolean isSelected() {
 		return selected;
@@ -37,4 +44,35 @@ public class ReceivablesExt extends Receivables{
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public BigDecimal getBillTotalPrice() {
+		return billTotalPrice;
+	}
+	public void setBillTotalPrice(BigDecimal billTotalPrice) {
+		this.billTotalPrice = billTotalPrice;
+	}
+	public String getBillState() {
+		return BillState;
+	}
+	public void setBillState(String billState) {
+		BillState = billState;
+	}
+	public Integer getBillId() {
+		return BillId;
+	}
+	public void setBillId(Integer billId) {
+		BillId = billId;
+	}
+	public BigDecimal getOtherExpenses() {
+		return otherExpenses;
+	}
+	public void setOtherExpenses(BigDecimal otherExpenses) {
+		this.otherExpenses = otherExpenses;
+	}
+	
 }

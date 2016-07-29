@@ -61,7 +61,7 @@
     				<td>单号：<input name="orderNumber" value="${XSrandomNumber}" type="hidden"></td>
     				<td  colspan="2" style="font-family:宋体;color: red;">${XSrandomNumber}</td>
     				<td>其它费用:
-    					<input class="easyui-numberbox"  name="otherExpenses" ></input>
+    					<input class="easyui-numberbox" precision="2" value="0.00" name="otherExpenses" ></input>
     				</td>
     			</tr>
     		</table>
@@ -119,11 +119,13 @@
     	            title: '单价',
     	            width: "10%",
     	            editor: 'text',
+    	            precision:2,
     	            editor: {
-    	                type: 'validatebox',
+    	                type: 'numberbox',
     	                options: {
     	                    validType: 'money',
-    	                    required:true
+    	                    required:true,
+    	                    precision:2
     	                }
     	            }
     	        },
@@ -204,7 +206,6 @@
                 onClose: function () {  
                 	$(this).dialog('destroy');//销毁  
                 }
-                
             });
     	}
     	function saveall() {
@@ -248,7 +249,7 @@
                                 });
                                 $('#insertBillXSForm').form("clear");
                                 $('#insertBillDialog').dialog("close");
-                                $("#tblBill").datagrid("reload");
+                                $("#tblSaleBill").datagrid("reload");
                             } else {
                                 $.messager.show({
                                     title:'错误',

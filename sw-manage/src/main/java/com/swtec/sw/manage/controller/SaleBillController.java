@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.swtec.sw.persist.enums.BillRKType;
+import com.swtec.sw.persist.enums.BillRKState;
 import com.swtec.sw.persist.enums.CompanyType;
 import com.swtec.sw.persist.enums.SaleType;
 import com.swtec.sw.persist.model.Bill;
@@ -60,6 +60,7 @@ public class SaleBillController {
 		UserExt user=new UserExt();
 		List<User> usersList=userService.notPageList(user);
 		model.addAttribute("usersList", usersList);
+		model.addAttribute("billRKStates", BillRKState.values());
 		return "sale/saleBillList";
 	}
 	/**

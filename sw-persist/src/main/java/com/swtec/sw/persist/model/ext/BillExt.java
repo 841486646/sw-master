@@ -8,6 +8,7 @@ public class BillExt extends Bill{
 	private int rows;
 	private int total;
 	private boolean selected;
+	private Integer receivablesId;
 	
 	public boolean isSelected() {
 		return selected;
@@ -33,4 +34,11 @@ public class BillExt extends Bill{
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
+	public Integer getReceivablesId() {
+		return receivablesId;
+	}
+	public void setReceivablesId(Integer receivablesId) {
+		this.receivablesId = receivablesId;
+	}
+	
 }

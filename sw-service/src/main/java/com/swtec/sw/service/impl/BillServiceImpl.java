@@ -65,7 +65,7 @@ public class BillServiceImpl extends BaseServiceImpl implements BillService{
 		List<Bill> suppliers=null;
 		try {
 			billExt.setTotal(billMapperExt.countByExample(selParam));
-			suppliers = billMapperExt.selectByExample(selParam);
+			suppliers = billMapperExt.selectBillReceivables(selParam);
 		} catch (Exception e) {
 			throw new DbException(RespCode.DB_ERROR, e);
 		}

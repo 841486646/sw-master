@@ -339,6 +339,66 @@ public class ReceivablesExample {
             return (Criteria) this;
         }
 
+        public Criteria andBillIdIsNull() {
+            addCriterion("bill_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdIsNotNull() {
+            addCriterion("bill_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdEqualTo(Integer value) {
+            addCriterion("bill_id =", value, "billId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdNotEqualTo(Integer value) {
+            addCriterion("bill_id <>", value, "billId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdGreaterThan(Integer value) {
+            addCriterion("bill_id >", value, "billId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("bill_id >=", value, "billId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdLessThan(Integer value) {
+            addCriterion("bill_id <", value, "billId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdLessThanOrEqualTo(Integer value) {
+            addCriterion("bill_id <=", value, "billId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdIn(List<Integer> values) {
+            addCriterion("bill_id in", values, "billId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdNotIn(List<Integer> values) {
+            addCriterion("bill_id not in", values, "billId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdBetween(Integer value1, Integer value2) {
+            addCriterion("bill_id between", value1, value2, "billId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("bill_id not between", value1, value2, "billId");
+            return (Criteria) this;
+        }
+
         public Criteria andCTypeIsNull() {
             addCriterion("c_type is null");
             return (Criteria) this;
@@ -946,6 +1006,66 @@ public class ReceivablesExample {
 
         public Criteria andLastUserIdNotBetween(Integer value1, Integer value2) {
             addCriterion("last_user_id not between", value1, value2, "lastUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeIsNull() {
+            addCriterion("last_user_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeIsNotNull() {
+            addCriterion("last_user_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeEqualTo(Date value) {
+            addCriterion("last_user_time =", value, "lastUserTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeNotEqualTo(Date value) {
+            addCriterion("last_user_time <>", value, "lastUserTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeGreaterThan(Date value) {
+            addCriterion("last_user_time >", value, "lastUserTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("last_user_time >=", value, "lastUserTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeLessThan(Date value) {
+            addCriterion("last_user_time <", value, "lastUserTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeLessThanOrEqualTo(Date value) {
+            addCriterion("last_user_time <=", value, "lastUserTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeIn(List<Date> values) {
+            addCriterion("last_user_time in", values, "lastUserTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeNotIn(List<Date> values) {
+            addCriterion("last_user_time not in", values, "lastUserTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeBetween(Date value1, Date value2) {
+            addCriterion("last_user_time between", value1, value2, "lastUserTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastUserTimeNotBetween(Date value1, Date value2) {
+            addCriterion("last_user_time not between", value1, value2, "lastUserTime");
             return (Criteria) this;
         }
     }

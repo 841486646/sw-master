@@ -1,3 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.swtec.sw.persist.mapper.ReceivablesMapperExt" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swtec.sw.persist.mapper.ReceivablesMapperExt" >
+<resultMap id="ReceivablesMap" type="com.swtec.sw.persist.model.ext.ReceivablesExt" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bill_id" property="billId" jdbcType="INTEGER" />
+    <result column="c_type" property="cType" jdbcType="INTEGER" />
+    <result column="r_type" property="rType" jdbcType="INTEGER" />
+    <result column="receivables_time" property="receivablesTime" jdbcType="DATE" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="is_invoice" property="isInvoice" jdbcType="INTEGER" />
+    <result column="invoice_number" property="invoiceNumber" jdbcType="VARCHAR" />
+    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="receivables_price" property="receivablesPrice" jdbcType="DECIMAL" />
+    <result column="r_state" property="rState" jdbcType="INTEGER" />
+    <result column="last_user_id" property="lastUserId" jdbcType="INTEGER" />
+    <result column="last_user_time" property="lastUserTime" jdbcType="TIMESTAMP" />
+</resultMap>
+<select id="selectByPrimaryKeyReceivables" resultMap="ReceivablesMap" parameterType="java.lang.Integer" >
+    select R.*,B.order_number as orderNumber,B.total_price as billTotalPrice,B.state as BillState,B.other_expenses as otherExpenses,B.Id as BillId  from sw_receivables R LEFT JOIN sw_bill B ON  B.id=R.bill_id
+    where R.id = #{id,jdbcType=INTEGER}
+ </select>
+</mapper>

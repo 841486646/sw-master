@@ -597,7 +597,7 @@
   box-shadow: 0 0 3px 0 #95B8E7;
 }
 .textbox-invalid {
-  border-color: #ffffff;
+  border-color: #aac5e7;
   background-color: #fff3f3;
 }
 .filebox .textbox-value {
@@ -677,7 +677,7 @@
   cursor: default;
 }
 .textbox-invalid {
-  border-color: #ffffff;
+  border-color: #aac5e7;
   background-color: #fff3f3;
 }
 .combobox-item,
@@ -1187,7 +1187,7 @@
 .tabs-header-bottom .tabs li.tabs-selected a.tabs-inner,
 .tabs-header-left .tabs li.tabs-selected a.tabs-inner,
 .tabs-header-right .tabs li.tabs-selected a.tabs-inner {
-  border-color: #95B8E7;
+  border-color: #f4f4f4;
 }
 .tabs-p-tool a:hover,
 .tabs li a:hover.tabs-close,
@@ -2110,7 +2110,7 @@
   filter: alpha(opacity=50);
 }
 .textbox-invalid {
-  border-color: #ffffff;
+  border-color: #aac5e7;
   background-color: #fff3f3;
 }
 .slider-disabled {
